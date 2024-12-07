@@ -1,0 +1,77 @@
+<html>
+
+	<head>
+
+		<title>
+				Mission Calypso - Game Intro
+		</title>
+
+		<meta charset=UTF-8>
+
+		<link rel="stylesheet" href="../css/game-intro-outro.css">
+		<link rel="stylesheet" href="../css/buttons.css">
+
+	</head>
+
+	<body>
+
+
+
+		<!--<img src="../pictures/mainmenu/mainmenu_background.png", id="background">-->
+		<!-- jupiter background: https://www.nasa.gov/sites/default/files/thumbnails/image/pia21970-opt.jpg-->
+
+		<main id="main">
+				<!-- morsecode translator: https://morsecode.scphillips.com/translator.html -->
+	      <audio controls  autoplay loop volume="0.01">
+	        <source src="../audio/sounds/game_intro_morse.mp3" type="audio/mpeg">
+	        Your browser does not support the audio element.
+	      </audio>
+
+        <div id="message-captain-errol" class="page"><!--class="message-popup round">-->
+            <h1>Captain Errol to Commander Been</h1>
+            <p>
+              Commander Been, this is Captain Errol. Your Royal Highness, Queen Victoria, has commissioned me to instruct
+              You on your duties.
+            </p>
+            <p>
+              Due to the rapid progress of industrialisation, vital resources are in short supply and rise dramatically in price. Our scientists need more copper
+              to keep ahead of our competitors. Thanks to our technical advance, we can exploit mineral deposits nobody else even knows about.
+            </p>
+            <p>
+              Your duties are: Enlarge the great British Empire with space colonies and send back minerals to this little football called planet Earth.
+            </p>
+            <p>
+              Long live the Queen and the Empire!
+            </p>
+        </div>
+
+
+        <button id="no-sir-button" class="popupmenu-button round" onclick="location.href='../mission-calypso.html';">
+              No, Sir!
+        </button>
+
+
+				<button id="yes-sir-button" class="popupmenu-button round">
+	            Yes, Sir!
+				</button>
+
+				<div id="task" class="task-popup round"><!--class="message-popup round">-->
+            <h1>Your task:</h1>
+            <p>
+              Produce at least 7.5 t of copper ingots or 15 t of raw copper ore (or a mixture of both)
+							and return savely to Earth.
+            </p>
+
+						<button id="accept-task-button" class="popupmenu-button-inverted round">
+			            Accept task
+						</button>
+        </div>
+
+    </main>
+
+  </body>
+
+  <script src="../js/userinteraction/game-intro_button_interaction.js">
+	</script>
+
+</html>

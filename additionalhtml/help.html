@@ -1,0 +1,183 @@
+<html>
+
+	<head>
+
+		<title>
+				Mission Calypso - Help
+		</title>
+
+		<meta charset=UTF-8>
+
+		<link rel="stylesheet" href="../css/buttons.css">
+		<link rel="stylesheet" href="../css/mainmenu_entries.css">
+
+	</head>
+
+	<body>
+
+		<main id="main">
+				<button class="mainmenu-entry-button-left round" onclick="location.href='../mission-calypso.html';">
+						Back to Menu
+				</button>
+
+				<button class="mainmenu-entry-button-right round" onclick="location.href='./game_intro.html';">
+						Play Game!
+				</button>
+
+        <div class="page">
+              <h1>Help: How to use the gui </h1>
+                  The main userinterface is hidden per default. Only the headup-gui is visible
+                  all the time. By clicking on the headup-gui or the top of the menu rocket visible at
+                  the bottom of the screen, the game menu will slide up. To hide the settings, simply click
+                  again. The clickable areas are marked in the picture below.
+									</br>
+									</br>
+									<img src="../pictures/mission-calypso_game-world_screenshot_marked_small.jpg" style="width:40vw;"></img>
+									</br>
+
+              <h1>Getting started</h1>
+                  <h3>First steps </h3>
+                      To achieve the game's task, you need to get a central mining tunnel
+                      for the workers. Otherwise it is impossible to mine the resources. Take
+                      a good look at the map and decide, where it is most rewarding to mine.
+											Then open the game menu
+											</br>
+											</br>
+											<img src="../pictures/mission-calypso_game-popup_screenshot_small.jpg" style="width:40vw;"></img>
+											</br>
+											</br>
+
+											and select with the slider placed in the fieldset "main drill depth"
+                      the desired drilling depth. Confirm your choice by clicking on the "Start main drill!" button.
+                      The drill will start working; the progress will be displayed in the fieldset. In the same moment,
+											a worker will be commissioned for mining. This worker can not be decomissioned for the rest of the
+											game!
+                      </br>
+                      As soon as the first blocks are removed, the destination for the worker can be set by simply hiding
+                      the menu and clicking on the desired block that should be removed. If your choice is not yet reachable
+                      by a horizontal tunnel, don't worry, the miner will remove all blocks between himself and the destination.
+                      </br>
+                      If you feel the need, you can always go deeper if necessecary (up until you reach the main drill limit).
+
+                  <h3>A short introduction to the resource system</h3>
+											<p>
+													The basic principle of the game is very simple: Everything consumes resources. The player's task is yet to minimize
+													the consumption, but still being able to mine 15 t of copper ore and – if possible – refine it to copper ingots.
+										  </p>
+
+											<p>
+													Your main constraints are:
+													<ul>
+															<li>
+																	Keep the energy above 50 HU,
+															</li>
+															<li>
+																	Keep the CO<sub>2</sub> below 8 %,
+															</li>
+													</ul>
+													or the game is over. You can do so if you mine the minerals and refine them. The green Caloricum crystals
+													can be processed to energy, the blue and gray pottasium ore can be turned into decarbonizers. Each used kilogram of
+													Decarbonizers reduces the CO<sub>2</sub> by 2 %. You need to use it strategically: You only reduce CO<sub>2</sub>,
+													but you do not regain O<sub>2</sub>! On the long run, you can not prevent the O<sub>2</sub> concentration
+													to drop under 10.5 % which will also end the game. Treat the decarbonizers as a way to maintain productivity
+													and not as a method to prolong the game drastically by all means. Strategic decisions are needed to win the game, not brute force!
+											</p>
+
+
+							<h3>Maschine speed, workers & productivity</h3>
+									There are three main variables that determine your success: Maschine speed, worker asignement and productivity.
+									<p>
+											The machine speed acts as a multiplier. When set to zero, no operations are possible, but you do not consume any energy.
+											The higher the value is set, the faster the main drill and the workers will move. Additionally, the refinery output is
+											enlarged. The downside of setting a high machine speed: A lot more energy consumption and wear, which can be critical
+											when it comes to the final take off.
+									</p>
+
+									<p>
+											The amount of assigned workers can also multiply the output of operations. The downside of employing
+											more workers: Energy & O<sub>2</sub> consumption will rise compared to idle state. Same applies for
+											CO<sub>2</sub> production.
+									</p>
+
+									<p>
+											The productivity massively determines the possible refinery production. It depends on
+											<ul>
+													<li>
+																O<sub>2</sub> concentration,
+													</li>
+													<li>
+																CO<sub>2</sub> concentration,
+													</li>
+													<li>
+																machine speed.
+													</li>
+											</ul>
+											Be aware that O<sub>2</sub> drops drastically during gameplay which definitely has a huge
+											impact on your refinery output. Instead, the mining and main drill operations are not affect
+											by productivity, so they keep their speed even at the end of the game.
+									</p>
+
+							<h3>Refinery</h3>
+									<p>
+										The refinery is a tool to extend your possible working time by generating new supplies as the
+										initial storage won't last long.
+									</p>
+
+									<p>
+										The refinery production and consumption depends on the following parameters:
+										<ul>
+												<li>
+															machine speed,
+												</li>
+												<li>
+															number of worker assigned to refinery,
+												</li>
+												<li>
+															material multiplier (for weighting convertion priorities) ,
+												</li>
+												<li>
+															productivity.
+												</li>
+										</ul>
+										To use the refinery, simply check that the machine speed is non-zero, select the desired convertion priorities
+										and assign some workers. The production will start automatically. Bear in mind that running the refinery will
+										drastically rise your energy and oxygen consumption. So use this tool very carefully!
+									</p>
+
+							<h3>Fulfilling the task</h3>
+									<p>
+											If you have mined 15 t of copper ore, the task is automatically fulfilled. When the value is reached, a pop-up window
+											will appear. You can continue the game for mining further resources, reliefing weight by converting
+											raw resources into their refinery products or directly prepare the final take off.
+									</p>
+
+							<h3>Final take off</h3>
+									When you decided to leave this desert planet, all ressource values will freeze and
+									your engineer will calculate the probability for a successful take off. As parameters, he uses:
+									<ul>
+											<li>
+														the available energy,
+											</li>
+											<li>
+														the total weight,
+											</li>
+											<li>
+														the wear of the rocket.
+											</li>
+									</ul>
+									If the energy and the wear are too high, the rocket might explode. If you lack energy and are overloaded,
+									the space ship might not overcome gravity and crash on the ground. So mine and work with foresight; all
+									of your choices might have an impact!
+
+					<h1>Side quest</h1>
+							This not a necessecary part for the game play, but can you find the
+							ten hidden Easter Eggs out of science, history, movies, novels, 3D modeling
+							and gaming?
+
+        </div>
+
+    </main>
+
+  </body>
+
+</html>

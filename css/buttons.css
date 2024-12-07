@@ -1,0 +1,191 @@
+:root {
+
+  --calypsobrass: #edf60d;
+  --calypsocopper: rgb(200, 117, 51);
+
+}
+
+/*########################################################################*/
+/*#############  General button settings #################################*/
+/*########################################################################*/
+
+button {
+
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  outline:none;
+
+  cursor:pointer;
+  overflow: hidden;
+
+}
+
+/*########################################################################*/
+/*######### General settings for inverted round buttons  #################*/
+/*########################################################################*/
+
+/* negative rounded background adapted from: http://lea.verou.me/2011/03/beveled-corners-negative-border-radius-with-css3-gradients/ */
+
+/* Beginning of standard color scheme definition */
+.mainmenu-button, .mainmenu-entry-button-left, .mainmenu-entry-button-right, .popupmenu-button, .outro-sucess-button{
+    background: var(--calypsobrass);
+    background:
+      linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+      linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+      linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+      linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.mainmenu-button.round, .mainmenu-entry-button-left.round, .mainmenu-entry-button-right.round, .popupmenu-button.round, .outro-sucess-button.round{
+    background-image:
+      radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+      radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+      radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+      radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px);
+}
+
+/* Beginning of inverted color scheme definition */
+.popupmenu-button-inverted {
+    background: var(--calypsobrass);
+      background:
+        linear-gradient(135deg, transparent 10px, var(--calypsocopper) 0) top left,
+        linear-gradient(225deg, transparent 10px, var(--calypsocopper) 0) top right,
+        linear-gradient(315deg, transparent 10px, var(--calypsocopper) 0) bottom right,
+        linear-gradient(45deg,  transparent 10px, var(--calypsocopper) 0) bottom left;
+      background-size: 50% 50%;
+      background-repeat: no-repeat;
+
+      color: var(--calypsobrass);*/
+      font: Thaoma;
+      font-size: 25px;
+
+      width: 220px;
+      min-height: 50px;
+}
+.popupmenu-button-inverted.round{
+    background-image:
+      radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, var(--calypsocopper) 15px),
+      radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, var(--calypsocopper) 15px),
+      radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, var(--calypsocopper) 15px),
+      radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, var(--calypsocopper) 15px);
+}
+
+/* ######################################################################## */
+/* ###### Layout-rules for buttons in main menu  ########################## */
+/* ######################################################################## */
+
+#menu button {
+  padding: 0px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+
+}
+
+.mainmenu-button {
+
+  padding-top: 4px;
+  padding-bottom: 15px;
+
+  width: 326px;
+  height: 51px;
+
+}
+
+.mainmenu-button.round {
+
+    font: Thaoma;
+    font-size: 50px;
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 4px 0px  #555,
+            2px 4px 0px var(--calypsobrass)
+          ;
+}
+
+/* defining the buttons for main menu entries */
+.mainmenu-entry-button-left{
+
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    position: fixed;
+    left: 1.25vw;
+    top: 45vh;
+    width: 200px;
+    height: 62px;
+
+}
+
+.mainmenu-entry-button-right{
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    position: fixed;
+    right: 2.5vw;
+    top: 45vh;
+    width: 200px;
+    height: 62px;
+
+}
+
+.mainmenu-entry-button-left.round, .mainmenu-entry-button-right.round{
+
+      font: Thaoma;
+      font-size: 25px;
+      color: rgb(200, 117, 51);
+}
+
+/*########################################################################################*/
+/*########################### Styling of the in game buttons #############################*/
+/*########################################################################################*/
+
+.popupmenu-button {
+
+  padding-top: 4px;
+  padding-bottom: 16px;
+
+  width: 150px;
+  height: 52px;
+
+}
+
+.popupmenu-button.round {
+
+    font: Thaoma;
+    font-size: 20px;
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 1px 0px  #555,
+            0.5px 2px 0px var(--calypsobrass)
+          ;
+}
+
+/* definition of singel in-game elements */
+#game-gui-popup button {
+  padding: 0px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+
+}
+
+#weight-relief-popup button {
+  padding: 0px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+
+}
+
+.outro-sucess-button{
+
+    padding-top: 4px;
+    padding-bottom: 15px;
+
+    width: 500px;
+    height: auto;
+}
+
+.outro-sucess-button.round{
+
+    font: Thaoma;
+    font-size: 30px;
+    color: rgb(200, 117, 51);
+
+}

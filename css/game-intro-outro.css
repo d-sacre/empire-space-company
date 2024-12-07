@@ -1,0 +1,168 @@
+: root {
+
+    --calypsobrass: #edf60d;
+    --calypsocopper: rgb(200, 117, 51);
+
+}
+
+body {
+  background-color: black;
+  background-image: url("../pictures/gameintro/pia21972.jpg");
+  height: auto;
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+
+  color: black;
+}
+
+button{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  outline:none;
+
+  cursor:pointer;
+  overflow: hidden;
+}
+
+audio {
+   display:none;
+}
+
+
+/* Little intro story */
+/*css source: https://codepen.io/efost/pen/rrjvkk */
+.page {
+  background-color: #f8f5de;
+  background-image: linear-gradient(to right, rgba(255,210,0,0.4), rgba(200, 160, 0, 0.1) 11%, rgba(0,0,0,0) 35%, rgba(200, 160, 0, 0.1) 65%);
+  box-shadow: inset 0 0 75px rgba(255,210,0,0.3), inset 0 0 20px rgba(255,210,0,0.4), inset 0 0 30px rgba(220,120,0,0.8);
+  color: rgba(0,0,0,0.5);
+  font-family: "AustralisProSwash-Italic";
+  width: calc(8.5in - 15em);
+  height: 60vh;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  padding: 2.5em 5em 10em 5em;
+
+  position: absolute;
+  left: calc(0.5*calc(8.5in - 15em));
+  top: 5vh;
+
+  display: block;
+}
+
+.page h1{
+  font-size: 20px;
+}
+
+
+/* Buttons */
+body button{
+
+  padding: 0px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  outline:none;
+
+  cursor:pointer;
+  overflow: hidden;
+}
+
+#no-sir-button{
+  position: absolute;
+  bottom: 10px;
+  left: 30px;
+
+  font-size: 30px;
+  text-align: center;
+}
+
+
+#yes-sir-button{
+  position: absolute;
+  bottom: 10px;
+  right: 100px;
+
+  font-size: 30px;
+  text-align: center;
+}
+
+#outro-success-back-to-menu-button{
+    position: absolute;
+    bottom: 3.5vh;
+    left: 7.5vw;
+}
+
+#rocket-explode-video {
+    position: absolute;
+    bottom: 5vh;
+    left: 12.5vw;
+
+    width: 960px;
+    height: 540px;
+
+    border: 10px var(--calypsocopper) solid;
+    border-radius: 50px;
+}
+
+/* Popup to inform about the task*/
+.task-popup{
+  position: absolute;
+  top:30vh;
+  left: 31vw;
+
+  width: 30vw;
+  height: 37vh; /*37vh 15vw*/
+  /* Chrome has problems with rendering gradients properly; this magic number guarentees error free rendering in Chrome as long as not in fullscreen mode*/
+
+  background: var(--calypsobrass);
+	background:
+		linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+		linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+		linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+		linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+  text-align: center;
+
+  padding: 0vw 4vw 4vw 4vw;
+
+  font-size: 20px;
+  color: var(--calypsocopper);
+  /*background-color: var(--calypsobrass);*/
+
+  display: none;
+
+  z-index: 20;
+}
+
+.task-popup h1{
+
+  text-align: center;
+}
+
+.task-popup a{
+
+  padding-bottom: 2vw;
+}
+
+.task-popup.round{
+  background-image:
+		radial-gradient(circle at 0 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px);
+
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 1px 0px  #555,
+            0.5px 2px 0px var(--calypsobrass)
+          ;
+
+    z-index: 20;
+
+    display: none;
+}

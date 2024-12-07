@@ -1,0 +1,44 @@
+<html>
+
+	<head>
+
+		<title>
+				Mission Calypso - You lost!
+		</title>
+
+		<meta charset=UTF-8>
+		
+		<link rel="stylesheet" href="../css/game-intro-outro.css">
+		<link rel="stylesheet" href="../css/buttons.css">
+
+	</head>
+
+	<body>
+		<audio id="fail-music" controls volume="0.01">
+			<source src="../audio/music/ThePulse.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+
+		<video id="rocket-explode-video" autoplay>
+ 				<source src="../video/rocket_explode2.mp4" type="video/mp4">
+
+				Your browser does not support the video tag.
+		</video>
+
+		<div id="rocket-explode-popup" class="task-popup round">
+				<h1>Game over!</h1>
+				<p>
+						The rocket could not withstand the take off!
+				</p>
+
+				<button id="outro-fail-back-to-menu-button" class="popupmenu-button-inverted round" onclick="location.href='../mission-calypso.html';">
+							Return to Main Menu
+				</button>
+		</div>
+
+  </body>
+
+  <script src="../js/userinteraction/warnings/audio-visualwarning.js"></script>
+	<script src="../js/userinteraction/game-outro-fail_vid-and-audio.js"></script>
+
+</html>

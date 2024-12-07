@@ -1,0 +1,66 @@
+: root {
+
+    --calypsobrass: #edf60d;
+    --calypsocopper: rgb(200, 117, 51);
+
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+h1 {
+  font-family: Thaoma;
+  position: absolute;
+  font-size: 50pt;
+  color: yellow;
+
+  top: -20px;
+  left: 350px;
+}
+
+#background {
+  position: absolute;
+  left: 26vw;
+  top: 0vw;
+
+  width: 74vw;
+
+  z-index: -1;
+}
+
+#title-inpicture{
+  position: absolute;
+  top: 1vh;
+  left: 1vw;
+
+  width: 25vw;
+  z-index: 0;
+}
+
+#menu{
+  position: absolute;
+  top: 27.5vh;
+  left: 0vw;
+  list-style: none;
+  padding-left: 1.5vw;
+}
+
+#menu li {
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+
+
+footer {
+  position: absolute;
+  bottom: 10px;
+}
+
+audio {
+   display:none;
+}

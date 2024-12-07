@@ -1,0 +1,381 @@
+<html>
+
+	<head>
+
+		<title>
+				Mission Calypso - Now playing!
+		</title>
+
+		<meta charset=UTF-8>
+
+		<link rel="stylesheet" href="../css/game.css">
+		<link rel="stylesheet" href="../css/buttons.css">
+
+	</head>
+
+	<body>
+
+		<audio id="warning" controls  loop>
+		  <source src="../audio/sounds/berlin-stmospheres_warningalarm_id-0904_4times.mp3" type="audio/mpeg">
+		  Your browser does not support the audio element.
+		</audio>
+
+		<audio id="game-over-song" controls volume="0.01">
+			<source src="../audio/music/ThePulse.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+
+		<div id="game-gui-popup-container">
+			<div id="headup-gui-container">
+				<div id="headup-gui-container-clickbox" class="headup-gui-container-clickbox"></div>
+				<fieldset id="headup-gui-spaceship" class="headup-gui">
+					 <legend>spaceship:</legend>
+					 <ul>
+							<li>
+									energy: <span class="energy-value" value="150"> 150/150 HU</span>
+							</li>
+
+							<li>
+									O<sub>2</sub>: <span class="oxygen-value" value="21.0"> 00.0/21.0 % </span>
+							</li>
+
+							<li>
+									CO<sub>2</sub>: <span class="carbondioxide-value" value="0.04"> 0.04/8.00 % </span>
+							</li>
+
+							<li>
+									weight: <span class="weight-value" value="100"> 100/150 t </span>
+							</li>
+
+							<li>
+									productivity: <span class="productivity-value" value="0"> 000/100 % </span>
+							</li>
+
+							<li>
+									wear: <span class="wear-value" value="0"> 000/100 % </span>
+							</li>
+					 </ul>
+				</fieldset>
+
+				<fieldset id="game-timer" class="headup-gui">
+						<legend>time:</legend>
+						<span class="time-value" value="0"> 0 s </span>
+				</fieldset>
+
+			</div>
+		</div>
+
+		<div id="game-gui-popup" class="game-gui-popup transform">
+
+				<div id="to-rocket-menu-clickbox" class="clickbox-popupmenu">
+				</div>
+
+				<img id="rocket-img-popupmenu" src="../pictures/gamepopupmenu/rockettest2_collada.png"></img><!--rocket_rotated_recolored.png"></img>-->
+
+				<fieldset id="drill-storey-setup" onchange="system.refreshSliderDisplay()">
+					<legend>main drill depth</legend>
+					</br>
+					</br>
+					<input id="drill-storey-slider" type="range" min="1" max="8" default value="1" value="">
+					</br>
+					</br>
+					<span id="drill-storey-slider-current-value" value="">0</span><span id="drill-storey-slider-target-value" value="">/0 floors</span>
+					<span id="drill-start-confirmed" value="0"><span>
+					</br>
+					</br>
+					current state:
+					</br>
+					<span id="current-main-drill-state">starting position</span>
+					</br>
+					</br>
+					<button id="start-main-drill-button" class="popupmenu-button round">
+						Start main drill!
+					</button>
+				</fieldset>
+
+				<div id="return-button-align-box">
+						<button id="back-to-mainmenu-popup-button" class="popupmenu-button round">
+							Back to Menu
+						</button>
+
+						<button  id="return-to-game-popup-button" class="popupmenu-button round">
+							Return to Game
+						</button>
+				</div>
+
+				<button id="back-to-prepare-takeoff-button" class="popupmenu-button round">
+					Take-off!
+				</button>
+
+				<ul id="game-gui-popup-firstrow">
+					<li>
+						<fieldset id="machine-speed-work-assignement-popup" onchange="system.refreshSliderDisplay()">
+								<legend> machine speed & work assignement</legend>
+
+								<label for="machine-speed"> machine speed:  </label>
+								<input name="machine-speed" id="machine-speed-slider" type="range" min="0" max="2" step="0.5" default value="1">
+								<span id="machine-speed-slidervalue" type="text" value="">1 &times;</span>
+								</br>
+								</br>
+								main drill: <span id="main-drill-speed" value="">1 block/s</span>
+								</br>
+								worker-mining: <span id="miner-speed" value="">1 block/s</span>
+
+								</br>
+								</br>
+								<strong> <font color="green">work assignement:</font> </strong>
+								</br>
+								</br>
+
+							  <label for="worker-idle"> worker-idle:  </label>
+							  <!--<input name="worker-idle" id="worker-idle-slider" type="range" min="0" max="3" step="1" default value="3">-->
+							  <span id="worker-idle-slidervalue" type="text" value="">3</span>
+
+					      </br>
+
+						    <label for="worker-mining"> worker-mining:  </label>
+						    <!--<input name="worker-mining" id="worker-mining-slider" type="range" min="0" max="3" step="1" default value="0">-->
+						    <span id="worker-mining-slidervalue" type="text" value="">0</span>
+
+					      </br>
+
+						    <label for="worker-refinery"> worker-refinery:  </label>
+						    <input name="worker-refinery" id="worker-refinery-slider" type="range" min="0" max="3" step="1" default value="0">
+						    <span id="worker-refinery-slidervalue" type="text" value="">0</span>
+
+					      </br>
+						</fieldset>
+					</li>
+
+					<li>
+						<fieldset id="storage-popupmenu">
+							<legend> storage: <span id="weight-storage-value" value=""> </legend>
+							<ul>
+								<li>
+									caloricum ore
+									<div id="raw-caloricum-storage" class="drag-and-drop-menu-material-container">
+											<img id="caloricum-ore" src="../pictures/gamepopupmenu/storageitems/caloricum_green.png" class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span id="raw-caloricum-storage-value" value=""> 5 t</span>
+								</li>
+
+								<li>
+									copper ore
+									<div id="copper-storage" class="drag-and-drop-menu-material-container">
+											<img id="copper-ore" src="../pictures/gamepopupmenu/storageitems/copper.png"  class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span id="copper-ore-value" value="0"> 0 t</span>
+								</li>
+
+								<li>
+									pottasium ore
+									<div id="raw-pottasium-storage" class="drag-and-drop-menu-material-container">
+											<img id="pottasium-ore" src="../pictures/gamepopupmenu/storageitems/pottassium.png" class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span id="pottasium-ore-value" value="0"> 0 kg </span>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									energy
+									<div id="energy-storage"  class="drag-and-drop-menu-material-container">
+											<img id="energy-symbol" src="../pictures/gamepopupmenu/storageitems/energy.png"  class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span class="energy-storage-value">500 HU</span>
+								</li>
+
+								<li>
+									copper ingot
+									<div id="copper-ingot" class="drag-and-drop-menu-material-container">
+											<img id="copper-ingot" src="../pictures/gamepopupmenu/storageitems/copper-ingot.png"  class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span id="copper-ingot-value" value="0">0 t</span>
+								</li>
+
+								<li>
+									decarbonizer
+									<div id="decarbonizer-storage"  class="drag-and-drop-menu-material-container">
+											<img id="decarbonizer-product" src="../pictures/gamepopupmenu/storageitems/decarbonizer.png" class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span id='decarbonizer-storage-value' class="decarbonizer-storage-value" value='0'>5 kg</span>
+								</li>
+							<ul>
+						</fieldset>
+					</li>
+				</ul>
+
+				<ul id="game-gui-popup-secondrow" onchange="system.refreshSliderDisplay()">
+					<li>
+						<fieldset id="refinery-assignement-popup">
+							<legend> refinery assignement</legend>
+
+						 <label for="caloricum-processing"> caloricum rate:  </label>
+						 <input name="caloricum-processing" id="caloricum-processing-slider" type="range" min="0" max="2" step="0.1" default value="2">
+						 <span id="caloricum-processing-slidervalue" type="text" value="">0 &times;</span>
+
+						 </br>
+
+						 <div style="font-size: 12px; width: 25vw; color: red;" class="pagesmall">
+							 	copper rate: Out of order! *
+						 </div>
+
+						 <label for="pottasium-processing"> pottasium rate:  </label>
+						 <input name="pottasium-processing" id="pottasium-processing-slider" type="range" min="0" max="2" step="0.1" default value="0">
+						 <span id="pottasium-processing-slidervalue" type="text" value="">0 &times;</span>
+
+						 </br>
+						 </br>
+
+						 <strong><font color="green">rate equations (production per s):</font></strong>
+					 </br>
+					 </br>
+						 <small id="caloricum-rate-equation">
+						  	</br>
+						 	  </br>
+								0 caloricum + 0 energy → 0 energy
+						 </small>
+					 	 </br>
+						 <small id="pottasium-rate-equation"> 0 pottasium + 0 energy → 0 decarbonizer
+						 </small>
+						 </br>
+						 </br>
+						 <div style="font-size: 10px; width: 26vw" class="pagesmall">
+							 	* Copper refinery out of order due to shortage of metal specialists.
+								We are very sorry. On behalf, Captain Errol.
+						 </div>
+
+					</fieldset>
+
+				</li>
+
+				<li>
+					<fieldset id="use-item-popupmenu">
+						<legend> use item </legend>
+						number of decarbonizers:
+						</br>
+						</br>
+						<input name="use-decarbonizer" id="use-decarbonizer-slider" type="range" min="0" max="3" step="1" default value="0" val="0">
+						<span id="use-decarbonizer-slidervalue" type="text" value="">0</span>
+						</br>
+						</br>
+						CO<sub>2</sub> current: <span class="carbondioxide-beforeuseitem-value" value="0.04">0.04/8.00 %</span>
+						</br>
+						CO<sub>2</sub> after: <span id="carbondioxide-afteruseitem-value" class="carbondioxide-afteruseitem-value" value="0.04">0.04/8.00 %</span>
+						</br>
+						</br>
+						<div id="use-carbonizer-button-align-box">
+									<button id="use-carbonizer-button" class="popupmenu-button round">Decarbonize!</button>
+						</div>
+					</fieldset>
+
+				</li>
+			</ul>
+
+			</div>
+
+		</div>
+
+		<div id="supplies-game-over-popup"class="game-over-popup round">
+			<h1> Game over!</h1>
+			Your supplies are too low to survive.
+			</br>
+			</br>
+			<button id='game-over-back-to-mainmenu-popup-button' class="popupmenu-button-inverted round">
+				 	Back to Menu
+			</button>
+
+		</div>
+
+		<div id="enough-copper-popup" class="enough-copper-popup round">
+			<h1> Civil Servant Silas Hobbs, storage manager </h1>
+			Congratulations, Commander Been. Just at this moment, we have gathered
+			enough copper ore and ingots in our storage.
+			</br>
+			</br>
+			There are two options now: With higher probability for a safe arrival, return to Earth or
+			being patriotic and produce more ore for her majesty to adore.
+			</br>
+			</br>
+
+			</br>
+			</br>
+			<button id='continue-mining-popup-button' class="popupmenu-button-inverted round">
+					Continue mining !
+			</button>
+
+			<button id='order-to-takeoff-popup-button' class="popupmenu-button-inverted round">
+					Prepare take off!
+			</button>
+		</div>
+
+		<span id="copper-max" value="15"></span>
+
+		<div id="prepare-takeoff-popup" class="prepare-takeoff-popup round">
+			<h1> Chief Engineer James What</h1>
+			Commander Been, I calculated the nessecary parameters for the take-off.
+			</br>
+			</br>
+			energy: <span id="energy-value-prepare-takeoff-popup" class="energy-value" value=""></span>,
+			</br>
+			weight: <span id="weight-value-prepare-takeoff-popup" class="weight-value" value=""></span>,
+			</br>
+			wear: <span id="wear-value-prepare-takeoff-popup" class="wear-value" value=""></span>,
+			</br>
+			</br>
+			The Mechanical Colossus Computer (MCC) determined a probability of
+			<span id="successful-takeoff-probability" value=""></span>
+			for sucessful take-off. We could relief weight to enlarge the probability or give
+			a damn and take off.
+			</br>
+			</br>
+			<button id='relief-weight-button' class="popupmenu-button-inverted round">
+				 	Relief weight!
+			</button>
+
+			<button id='takeoff-button' class="popupmenu-button-inverted round">
+					Take off!
+			</button>
+		</div>
+
+		<div id="weight-relief-popup" class="weight-relief-popup">
+				<div style="color:white;">
+						Ah, Commander Been, just what I was expecting! You young, unexperienced parvenu
+						were too greedy and now you become a coward. Just forget about it. I won't drop
+						any of my listed inventory! No, I mean exactly what I say. As long as me, Civil
+						Servant Silas Hobbs, storage manager for over four decades, is alive, nobody will
+						drop anything! First, we travel years to exploit what we have already destroyed at Earth:
+						The intact nature. Then, after we destroyed everything without any caution, we further poison the
+						dying remains because we miscalulated the maximal take-off weight.
+						</br>
+						</br>
+						Now bugger off! In hell, you will be in good company!
+				</div>
+
+				</br>
+				</br>
+				<button id='no-relief-weight-button' class="popupmenu-button round" style="width: 200px;"> O.k., I bugger off.</button>
+
+		</div>
+
+
+	</body>
+
+	<script src="../js/resourcesystem/resource_system_storage-and-refinery.js"></script>
+	<script src="../js/resourcesystem/resource_system_main.js"></script>
+	<script src="../js/resourcesystem/resource_system_storage-and-refinery.js"></script>
+	<script src="../js/gameloop.js"> </script>
+
+	<script src="../js/userinteraction/game_button_interaction.js"></script>
+	<script src="../js/userinteraction/warnings/audio-visualwarning.js"></script>
+
+	<script src="../js/threejs/three.js"></script>
+	<script src="../js/threejs/threejs_gui_interface.js" ></script>
+	<script src="../js/threejs/OrbitControls.js" ></script>
+	<script src="../js/threejs/Sky.js" ></script>
+	<script src="../js/threejs/map.js" ></script>
+	<script src="../js/threejs/lights.js" ></script>
+	<script src="../js/threejs/moving_elements.js" ></script>
+	<script src="../js/threejs/actions.js" ></script>
+	<script src="../js/threejs/scene.js" ></script>
+
+</html>

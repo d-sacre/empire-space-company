@@ -1,0 +1,633 @@
+:root {
+
+   --calypsobrass: #edf60d;
+   --calypsocopper: rgb(200, 117, 51);
+
+   --headupgui-stop: rgba(55,55,55,0.75); /* orange=rgba(155,155,0,0.75), red=rgba(255,0,0,0.75)*/
+   --headupgui-start: rgba(55,55,55,0);
+
+}
+
+*{
+
+  box-sizing: border-box;
+}
+
+body {
+
+  margin: 0;
+
+  color: white;
+  overflow: hidden;
+
+}
+
+fieldset {
+  border-radius: 10px;
+
+}
+
+audio {
+   display:none;
+}
+
+/* old paper effect */
+/*css source: https://codepen.io/efost/pen/rrjvkk */
+.pagesmall {
+  background-color: #f8f5de;
+  background-image: linear-gradient(to right, rgba(255,210,0,0.4), rgba(200, 160, 0, 0.1) 11%, rgba(0,0,0,0) 35%, rgba(200, 160, 0, 0.1) 65%);
+  box-shadow: inset 0 0 75px rgba(255,210,0,0.3), inset 0 0 20px rgba(255,210,0,0.4), inset 0 0 30px rgba(220,120,0,0.8);
+  color: rgba(0,0,0,0.5);
+  font-family: "AustralisProSwash-Italic";
+  width: calc(8.5in - 15em);
+
+  letter-spacing: 0.05em;
+  padding-top: 2.5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 5px;
+
+
+  display: block;
+}
+
+/*########################################################################## */
+/*###### definition of headup-gui-popup-style ################################ */
+/*########################################################################## */
+
+.headup-gui{
+
+  position: absolute;
+  top: 0vh;
+  left: 10vw;
+
+  pointer-events:none;
+}
+
+
+#headup-gui-container li {
+  list-style: none;
+  display: inline-block;
+}
+
+#game-timer {
+  position: absolute;
+  top: 1vh;
+  left: 89vw;
+
+  width: 8vw;
+
+}
+
+#headup-gui-spaceship{
+  position: absolute;
+  top: 1vh;
+  left: 2.5vw;
+
+  width: 85vw;
+
+}
+
+/*########################################################################## */
+/*###### definition of game-gui-popup-style ################################ */
+/*########################################################################## */
+
+#game-rendering-area{
+  position: fixed;
+  /*z-index: 0;*/
+}
+
+/*########################################################################## */
+/*###### definition of game-gui-popup-style ################################ */
+/*########################################################################## */
+
+.transform {
+  -webkit-transition: all 2s ease;
+  -moz-transition: all 2s ease;
+  -o-transition: all 2s ease;
+  -ms-transition: all 2s ease;
+  transition: all 2s ease;
+}
+
+
+.clickbox-popupmenu{
+  position: absolute;
+  bottom: 80vh;
+  left: -6vw;
+
+  width: 106vw;
+  height: 10vh;
+
+  z-index: 6;
+}
+
+.headup-gui-container-clickbox{
+  position: absolute;
+  top: 0vh;
+  left: 0vw;
+  width: 100vw;
+  height: 20vh;
+
+  background-image:
+  linear-gradient(to bottom, var(--headupgui-stop),var(--headupgui-start));
+  background-repeat: no-repeat;
+
+  z-index=20;
+}
+
+#rocket-img-popupmenu{
+  position: absolute;
+  bottom: 7vh; /* 3vh */
+  left: 18vw; /*15vw, 13vw, 11vw*/
+  height: 83.5vh;
+  width: 14vw; /* 20vw values for 2D art*/
+
+  /*position: absolute;
+  bottom: 2vh;
+  left: 13vw;
+  height: 87.5vh;
+  width: 20vw;*/
+
+  z-index: 5;
+
+}
+
+
+.game-gui-popup{
+  position: absolute;
+  left: 5vw;
+  bottom: -85vh;/*-70vh;*/
+
+
+  background-color: var(--calypsocopper);
+  border: solid 5px var(--calypsobrass);
+  border-radius: 10px;
+
+  box-shadow: 10px 10px 5px;
+
+
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  font-size: 12px;
+  color: black;
+
+  height: 84vh;
+  width: 90vw;
+
+  z-index: 4;
+
+}
+
+.game-gui-popup ul{
+    padding: 10px;
+    margin: 0px;
+}
+
+.game-gui-popup li{
+    list-style: none;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.transform-active {
+  bottom: 0vh;
+}
+
+.game-gui-popup legend{
+  color: green;
+  font-weight: bold;
+}
+
+.game-gui-popup label{
+  color: black;
+}
+
+#game-gui-popup-firstrow span{
+  color: white;
+
+}
+
+#game-gui-popup-secondrow span{
+  color: white;
+
+}
+
+#game-gui-popup-firstrow li{
+  color: black;
+
+}
+
+#game-gui-popup-secondrow li{
+  color: black;
+
+}
+
+#drill-storey-setup span {
+  text-align: center;
+  color: white;
+
+}
+
+#storage-popupmenu span {
+
+  color: white;
+
+}
+
+
+#game-gui-popup-container{
+  overflow: hidden;
+
+}
+
+
+#general-popup{
+
+  position: absolute;
+  top: 1vh;
+  right:25vw;
+
+  width: 20vw;
+  height: 37.5vh;
+
+  padding: 5px;
+
+  font-size: 12pt;
+
+}
+
+#storage-popupmenu{
+
+  position: absolute;
+  top: 1vh;
+  right: 2.5vw;
+
+  height: 37.5vh;
+  width: 20vw;
+
+  font-size: 12pt;
+
+}
+
+#storage-popupmenu ul{
+
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+#storage-popupmenu li{
+  list-style: none;
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+#use-item-popupmenu{
+
+    position: absolute;
+    top: 40vh;
+    right: 2.5vw;
+
+    height: 37.5vh;
+    width: 20vw;
+
+    font-size: 12pt;
+
+  }
+
+
+#use-item-popupmenu ul{
+
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+#use-item-popupmenu li{
+  list-style: none;
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+#machine-speed-work-assignement-popup{
+  position: absolute;
+  top: 1vh;
+  right: 26.5vw;
+
+  height: 37.5vh;
+
+  font-size: 12pt;
+  width: 28vw;
+}
+
+#refinery-assignement-popup{
+  position: absolute;
+  top: 40vh;
+  right: 26.5vw;
+
+  height: 37.5vh;
+  width: 28vw;
+
+  font-size: 12pt;
+}
+
+#drill-storey-setup{
+  position: absolute;
+  top: 1vh;
+  left: 1vw;
+
+  height: 57.5vh;
+  width: 15vw;
+
+  font-size: 12pt;
+
+}
+
+#drill-storey-slider{
+  margin-top: 50px;
+  margin-bottom:50px;
+  transform: rotate(90deg);
+  -moz-transform: rotate(90deg); /*do same for other browsers if required*/
+}
+
+/* drag and drop Menu */
+.drag-and-drop-menu-material-container {
+    width: 70px;
+    height: 70px;
+    padding: 5px;
+    border: 1px solid #aaaaaa;
+}
+
+.storage-popupmenu-draganddrop-icon{
+
+  height: 65px;
+  width: auto;
+
+  padding:  10px;
+}
+
+.game-over-popup{
+  position: absolute;
+  top:33vh;
+  left: 35vw;
+
+  width: 30vw;
+  height: 37vh; /*37vh 15vw*/
+  /* Chrome has problems with rendering gradients properly; this magic number guarentees error free rendering in Chrome as long as not in fullscreen mode*/
+
+  background: var(--calypsobrass);
+	background:
+		linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+		linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+		linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+		linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+  text-align: center;
+
+  padding: 0vw 4vw 4vw 4vw;
+
+  font-size: 20px;
+  color: var(--calypsocopper);
+
+
+  z-index: 20;
+
+}
+
+.game-over-popup h1{
+
+  text-align: center;
+}
+
+.game-over-popup a{
+
+  padding-bottom: 2vw;
+}
+
+.game-over-popup.round{
+  background-image:
+		radial-gradient(circle at 0 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px);
+
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 1px 0px  #555,
+            0.5px 2px 0px var(--calypsobrass)
+          ;
+
+    z-index: 20;
+}
+
+/* ########################################################################## */
+/* ############ game over popup specification ############################### */
+/* ########################################################################## */
+
+#supplies-game-over-popup{
+  display: none;
+}
+
+/* */
+
+.enough-copper-popup{
+  position: absolute;
+  top:33vh;
+  left: 30vw;
+
+  width: 45vw;
+  height: 45vh; /*37vh 15vw*/
+  /* Chrome has problems with rendering gradients properly; this magic number guarentees error free rendering in Chrome as long as not in fullscreen mode*/
+
+  background: var(--calypsobrass);
+	background:
+		linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+		linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+		linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+		linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+  text-align: center;
+
+  padding: 0vw 4vw 4vw 4vw;
+
+  font-size: 15px;
+  color: var(--calypsocopper);
+
+  z-index: 20;
+}
+
+.enough-copper-popup h1{
+  font-size: 20px;
+}
+
+.enough-copper-popup.round{
+  background-image:
+		radial-gradient(circle at 0 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px);
+
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 1px 0px  #555,
+            0.5px 2px 0px var(--calypsobrass)
+          ;
+
+    z-index: 20;
+}
+
+.prepare-takeoff-popup{
+  position: absolute;
+  top:25vh;
+  left: 30vw;
+
+  width: 45vw;
+  height: 50vh; /*37vh 15vw*/
+  /* Chrome has problems with rendering gradients properly; this magic number guarentees error free rendering in Chrome as long as not in fullscreen mode*/
+
+  background: var(--calypsobrass);
+	background:
+		linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+		linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+		linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+		linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+  text-align: center;
+
+  padding: 0vw 4vw 4vw 4vw;
+
+  font-size: 15px;
+  color: var(--calypsocopper);
+
+  z-index: 20;
+}
+
+.prepare-takeoff-popup h1{
+  font-size: 20px;
+}
+
+.prepare-takeoff-popup.round{
+  background-image:
+		radial-gradient(circle at 0 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px);
+
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 1px 0px  #555,
+            0.5px 2px 0px var(--calypsobrass)
+          ;
+
+    z-index: 20;
+}
+
+.weight-relief-popup{
+  position: absolute;
+  left: 5vw;
+  bottom: 7.5vh;/*-70vh;*/
+
+
+  background-color: var(--calypsocopper);
+  border: solid 5px var(--calypsobrass);
+  border-radius: 10px;
+
+  box-shadow: 10px 10px 5px;
+  box-shado
+
+
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-top: 10vh;
+  padding-bottom: 5vh;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+
+  font-size: 24px;
+  color: black;
+  font-family: Thaoma;
+
+  height: 84vh;
+  width: 90vw;
+
+  z-index: 21;
+
+  display: none;
+  text-align: justify;
+
+}
+
+.weight-relief-popup table{
+    padding-left: 5vw;
+}
+
+ .weight-relief-popup th{
+    min-width: 5vw;
+
+}
+
+#no-relief-weight-button{
+    position: absolute;
+    bottom: 8vh;
+    left: 35vw;
+}
+
+#enough-copper-popup{
+  display: none;
+}
+
+#prepare-takeoff-popup{
+  display: none;
+}
+
+#back-to-prepare-takeoff-button{
+  position: absolute;
+  bottom: 0vh;
+  left: 18.5vw;
+
+  display: none;
+
+  z-index: 6;
+
+}
+
+#use-carbonizer-button-align-box{
+    text-align: center;
+}
+
+#return-button-align-box{
+  position: absolute;
+
+  bottom: 0vh;
+  left: 1vw;
+
+  height: 22.5vh;
+  width: 15vw;
+
+  text-align: center;
+}
+
+/* ########################################################################## */
+/* ############ class-system gui ########################################### */
+/* ########################################################################## */
+.energy-value .oxygen-value .carbondioxide-value
+.weight-value .wear-value .time-value .productivity-value
+.energy-storage-value .decarbonizer-storage-value
+.decarbonizer-storage-value .carbondioxide-beforeuseitem-value
+.carbondioxide-afteruseitem-value{
+    color: white;
+}
