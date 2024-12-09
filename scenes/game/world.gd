@@ -11,6 +11,29 @@ extends Node2D
 @export_range(0, 99) var pottasiumProb : int = 7
 @export_range(0, 99) var caloricumProb : int = 8
 
+@export_category("Misc")
+@export var includedTiles : Dictionary = {"copper" : 5, "empty" : 80, "pottasium" : 7, "caloricum" : 8}
+
+@onready var tilemap : TileMapLayer = $TileMap
+
+func fillTileMap(width : int, height : int):
+	var source : TileSetSource = tilemap.tile_set.get_source(0)
+	var sum : int = 0
+	var elements : Array[Array] = []
+	for i in range(0, source.get_tiles_count()):
+		tilemap.set_cell(Vector2i(0,0), 0, source.get_tile_id(i))
+		var data : TileData = tilemap.get_cell_tile_data(Vector2i(0,0))
+		var tileName : String = data.get_custom_data("Name")
+		if includedTiles.has(tileName):
+			sum += includedTiles[tileName]
+			elements.append([sum, i])
+	for x in range(0, width):
+		for y in range(0, height):
+			var randomNumber : int = randi_range(0, sum)
+			for e in elements:
+				if randomNumber < e[0]:
+					tilemap.set_cell(Vector2i(x,y), 0, source.get_tile_id(e[1]))
+					break
 
 # REMARK: Atlas Texture ID follows the convention column first
 enum TILE_ATLAS_ID_LUT {
@@ -19,8 +42,6 @@ enum TILE_ATLAS_ID_LUT {
 	SANDSTONE_COPPER,
 	SANDSTONE_POTTASIUM
 }
-
-@onready var tilemap : TileMapLayer = $TileMap
 
 func convert_rnd_int_to_tile_atlas_id(rndNr : int) -> int:
 	if rndNr < self.emptyProb:
