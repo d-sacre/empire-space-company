@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://ba8vtmtikmgtc"]
+[gd_scene load_steps=9 format=3 uid="uid://ba8vtmtikmgtc"]
 
+[ext_resource type="Script" path="res://simulation/resources.gd" id="1_iadfv"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_j6x03"]
 [ext_resource type="PackedScene" uid="uid://n1wepdd70sj1" path="res://managers/inventoryManager.tscn" id="1_plo20"]
 [ext_resource type="Script" path="res://scenes/game/world.gd" id="1_xok2i"]
@@ -12,6 +13,9 @@
 script = ExtResource("1_j6x03")
 
 [node name="simulation" type="Node" parent="."]
+
+[node name="Resources" type="Node" parent="simulation"]
+script = ExtResource("1_iadfv")
 
 [node name="inventory" parent="." instance=ExtResource("1_plo20")]
 
