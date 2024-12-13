@@ -34,6 +34,7 @@ var _currentRoute : Dictionary = {
 		"TMC": Vector2i(0,0),
 		"LOCAL": Vector2(0,0)
 	},
+	"LAST_VISITED": Vector2i(0,0),
 	"TMC": [],
 	"LOCAL": {
 		"DRAW": [],
@@ -52,6 +53,18 @@ var _machineSpeed : float = 1.0
 
 var _routeLocked : bool = false
 var _enRoute : bool = false
+
+var _currentCollisionWithTile : Vector2i = Vector2i(0,0)
+var _lastCollisionWithTile : Vector2i = Vector2i(0,0)
+
+var _inventory : Dictionary = {
+	"ore": {
+		"empty": 0,
+		"caloricum": 0,
+		"potassium": 0,
+		"copper": 0
+	}
+}
 
 var _error : int = 0
 
@@ -88,6 +101,31 @@ func _clear_future_route_waypoints() -> void:
 	self._futureRoute.LOCAL.DRAW = PackedVector2Array()
 	self._futureRoute.LOCAL.PATH = PackedVector2Array()
 
+func _process_tile(tileCoordinate : Vector2i) -> void:
+	var cellData = self._tileMap.reference.get_cell_tile_data(tileCoordinate)
+	var oreType : String =  "NONE"
+
+	if cellData:
+		oreType = cellData.get_custom_data("ORE_TYPE")
+	
+	if oreType != "NONE":
+		if self._inventory["ore"].has(oreType):
+			self._inventory["ore"][oreType] +=  1
+		else:
+			self._inventory["ore"][oreType] = 1
+
+	self._tileMap.reference.erase_cell(self._currentCollisionWithTile)
+	self._lastCollisionWithTile = self._currentCollisionWithTile
+
+func _mine_tiles() -> void:
+	# var _tmp_lastVisited : Vector2i = self._currentRoute.LAST_VISITED
+
+	if self._currentCollisionWithTile != self._lastCollisionWithTile:
+		self._process_tile(self._currentCollisionWithTile)
+	else:
+		if self._currentCollisionWithTile == Vector2i(0,0):
+			self._process_tile(self._currentCollisionWithTile)
+
 ## initializes the drill with all the relevant [TileMapLayer] data[br]
 ## **REMARK:** [br]
 ## Variable `_scale` had to be used to prevent[br]
@@ -99,12 +137,6 @@ func initialize(tilemapReference : TileMapLayer, width : int, height : int, _sca
 	self._tileMap.scale = _scale
 	self._tileMap.reference = tilemapReference
 
-	# DESCRIPTION: Calculating the starting Tile Map Coordinates, convert them to Local Coordinates and 
-	# translate the drill above it
-	# REMARK: If Tile Map is not centered, this does not work
-	# @warning_ignore("integer_division")
-	# self._initialTile = Vector2i(0,0)# Vector2i(floor(self._tileMap.width/2) + self._tileMap.width % 2, 0)
-
 	# DESCRIPTION: Scale the Sprite according to the Tile Map so that it (visually) fits
 	self.set_drill_scale(4 * self._tileMap.scale)
 
@@ -113,8 +145,6 @@ func initialize(tilemapReference : TileMapLayer, width : int, height : int, _sca
 
 	self._sprite.position = self.calculate_drill_position_sprite(self._initialTile)
 	self._initialPosition.sprite = self._sprite.position
-
-	print_debug(self._initialPosition.path)
 
 	self._futureRoute.START_POINT.TMC = self._initialTile
 
@@ -139,19 +169,48 @@ func update_future_route(endPoint : Vector2) -> void:
 
 				var _tmp_futureRouteTMC : Array[Vector2i] = [_tmp_tileCoordinateStart]
 
-				# DESCRIPTION: Calculate intermediate points and decide, whether they are separated by a
-				# large enough distance to be both included into the path
+				# DESCRIPTION: Calculate intermediate points and decide, whether 
+				# 1) the end point is smaller than the first intermediate point, so none of the intermediate points has to be included
+				# 2) they are separated by a large enough distance to be both included into the path
 				# REMARK: Only holds true for centered Tile Maps; otherwise self._initialTile has to be used
 				var _tmp_intermediate1 : Vector2i = Vector2i(0, _tmp_tileCoordinateStart.y)
 				var _tmp_intermediate2 : Vector2i = Vector2i(0, _tmp_tileCoordinateEnd.y)
 
-				if _tmp_intermediate1 not in _tmp_futureRouteTMC:
-					_tmp_futureRouteTMC.append(_tmp_intermediate1)
+				var _tmp_tcEndSmallerIm1 : bool = _tmp_tileCoordinateEnd.x <= _tmp_intermediate1.x
+				var _tmp_tcEndLargerIm1 : bool = _tmp_tileCoordinateEnd.x >= _tmp_intermediate1.x
+				var _tmp_tcEndEqualIm1Y : bool = _tmp_tileCoordinateEnd.y == _tmp_intermediate1.y
 
-				if _tmp_intermediate1 != _tmp_intermediate2:
-					if _tmp_intermediate2 not in _tmp_futureRouteTMC:
-						if _tmp_intermediate2 != _tmp_tileCoordinateEnd:
-							_tmp_futureRouteTMC.append(_tmp_intermediate2)
+				var _tmp_sideLeft : bool = false
+				var _tmp_sideRight : bool = false
+
+				if _tmp_tileCoordinateStart.x < 0:
+					_tmp_sideLeft = true
+				elif _tmp_tileCoordinateStart.x > 0:
+					_tmp_sideRight = true
+
+				var _tmp_subconditionSmallerGreater : bool = (
+					(_tmp_tcEndSmallerIm1 and _tmp_sideLeft) 
+					or 
+					(_tmp_tcEndLargerIm1 and _tmp_sideRight)
+				) 
+
+				var _tmp_condition : bool = (
+					_tmp_subconditionSmallerGreater
+					and 
+					_tmp_tcEndEqualIm1Y
+				) and not self._inInitialState
+
+				# print_debug("Smaller: ", _tmp_tcEndSmallerIm1, ", larger: ", _tmp_tcEndLargerIm1, ", y equal: ", _tmp_tcEndEqualIm1Y, ", y not zero:", _tmp_yNotZero, ", left: ", _tmp_sideLeft, ", right: ", _tmp_sideRight)
+				# print_debug("larger/smaller: ", _tmp_subconditionSmallerGreater, ", CONDITION: ", _tmp_condition)
+
+				if not _tmp_condition:
+					if _tmp_intermediate1 not in _tmp_futureRouteTMC:
+						_tmp_futureRouteTMC.append(_tmp_intermediate1)
+
+					if _tmp_intermediate1 != _tmp_intermediate2:
+						if _tmp_intermediate2 not in _tmp_futureRouteTMC:
+							if _tmp_intermediate2 != _tmp_tileCoordinateEnd:
+								_tmp_futureRouteTMC.append(_tmp_intermediate2)
 
 				_tmp_futureRouteTMC.append(_tmp_tileCoordinateEnd)
 
@@ -169,6 +228,7 @@ func update_future_route(endPoint : Vector2) -> void:
 				self._futureRoute.LOCAL.PATH = _tmp_futureRouteLSDRAW 
 
 				if self._inInitialState:
+					self._futureRoute.LOCAL.PATH.insert(0,self._futureRoute.LOCAL.PATH[0])
 					self._futureRoute.LOCAL.PATH[0] += self.calculate_drill_position_sprite(_tmp_tileCoordinateStart)
 			
 			else:
@@ -178,10 +238,9 @@ func update_future_route(endPoint : Vector2) -> void:
 
 func new_target_selected() -> void:
 	self._routeLocked = true
-	print_debug("New Target selected!")
-
 
 	self._currentRoute = self._futureRoute
+	self._currentRoute.LAST_VISITED = self._currentRoute.START_POINT.TMC
 	self._futureRoute.START_POINT.TMC = self._currentRoute.END_POINT.TMC
 
 	var _tmp_curve : Curve2D = Curve2D.new()
@@ -200,6 +259,10 @@ func new_target_selected() -> void:
 		self._inInitialState = false
 
 	self._enRoute = true
+	print_debug("Inventory @ Start: ", self._inventory)
+
+func _on_area_2d_body_shape_entered(body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
+	self._currentCollisionWithTile = self._tileMap.reference.get_coords_for_body_rid(body_rid)
 
 func _ready() -> void:
 	pass
@@ -215,6 +278,8 @@ func _process(delta : float) -> void:
 		queue_redraw()
 	else:
 		if self._enRoute:
+			self._mine_tiles()
+
 			if self._pathFollow.progress_ratio < 1.0:
 				self._pathFollow.progress += self._machineSpeed * self.SPEED * delta
 
@@ -222,4 +287,4 @@ func _process(delta : float) -> void:
 				self._enRoute = false
 				self._routeLocked = false
 				self._clear_future_route_waypoints()
-			
+				print_debug("Inventory @ End: ", self._inventory)
