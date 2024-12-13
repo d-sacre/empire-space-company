@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlbu1i533bjmb"]
+
+[ext_resource type="Script" path="res://assets/2d/vehicles/drill/scripts/drill.gd" id="1_be76u"]
+[ext_resource type="Texture2D" uid="uid://8vvlkapqeci0" path="res://icon.svg" id="2_uxv71"]
+
+[sub_resource type="Curve2D" id="Curve2D_stwcw"]
+
+[node name="drill" type="Path2D"]
+curve = SubResource("Curve2D_stwcw")
+script = ExtResource("1_be76u")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+loop = false
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D"]
+texture = ExtResource("2_uxv71")

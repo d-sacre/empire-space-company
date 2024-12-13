@@ -7,16 +7,22 @@ resource_name = "Ground"
 texture = ExtResource("1_4nr4n")
 texture_region_size = Vector2i(512, 512)
 1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, 256, -256, 256)
 1:1/0/custom_data_0 = "pottasium"
 1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, 256, -256, 256)
 1:0/0/custom_data_0 = "copper"
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, 256, -256, 256)
 0:0/0/custom_data_0 = "empty"
 0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, 256, -256, 256)
 0:1/0/custom_data_0 = "caloricum"
 
 [resource]
 tile_size = Vector2i(512, 512)
+physics_layer_0/collision_layer = 64
+physics_layer_0/collision_mask = 65
 custom_data_layer_0/name = "Name"
 custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_pn6yr")
