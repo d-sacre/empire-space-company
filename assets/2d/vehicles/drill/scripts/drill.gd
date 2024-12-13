@@ -1,5 +1,7 @@
 extends Path2D
 
+signal request_inventory_change(keyChain, value, unit)
+
 const SPEED = 100
 
 var _tileMap : Dictionary = {
@@ -57,15 +59,6 @@ var _enRoute : bool = false
 var _currentCollisionWithTile : Vector2i = Vector2i(0,0)
 var _lastCollisionWithTile : Vector2i = Vector2i(0,0)
 
-var _inventory : Dictionary = {
-	"ore": {
-		"empty": 0,
-		"caloricum": 0,
-		"potassium": 0,
-		"copper": 0
-	}
-}
-
 var _error : int = 0
 
 @onready var _sprite : Sprite2D = $PathFollow2D/Sprite2D
@@ -109,17 +102,12 @@ func _process_tile(tileCoordinate : Vector2i) -> void:
 		oreType = cellData.get_custom_data("ORE_TYPE")
 	
 	if oreType != "NONE":
-		if self._inventory["ore"].has(oreType):
-			self._inventory["ore"][oreType] +=  1
-		else:
-			self._inventory["ore"][oreType] = 1
+		request_inventory_change.emit(["ore", oreType], 1, "FROM_LUT")
 
 	self._tileMap.reference.erase_cell(self._currentCollisionWithTile)
 	self._lastCollisionWithTile = self._currentCollisionWithTile
 
 func _mine_tiles() -> void:
-	# var _tmp_lastVisited : Vector2i = self._currentRoute.LAST_VISITED
-
 	if self._currentCollisionWithTile != self._lastCollisionWithTile:
 		self._process_tile(self._currentCollisionWithTile)
 	else:
@@ -259,7 +247,6 @@ func new_target_selected() -> void:
 		self._inInitialState = false
 
 	self._enRoute = true
-	print_debug("Inventory @ Start: ", self._inventory)
 
 func _on_area_2d_body_shape_entered(body_rid: RID, _body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	self._currentCollisionWithTile = self._tileMap.reference.get_coords_for_body_rid(body_rid)
@@ -287,4 +274,3 @@ func _process(delta : float) -> void:
 				self._enRoute = false
 				self._routeLocked = false
 				self._clear_future_route_waypoints()
-				print_debug("Inventory @ End: ", self._inventory)

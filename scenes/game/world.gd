@@ -12,7 +12,7 @@ extends Node2D
 
 var _error : int = 0
 
-func initializeWorld() -> void:
+func initialize() -> void:
 	self._tilemap.fillTileMap(includedTiles, _tilemapWidth, _tilemapHeight)
 	self._error = self._drill.initialize(self._tilemap, self._tilemapWidth, self._tilemapHeight, self._tilemap.scale)
 
@@ -20,10 +20,10 @@ func initializeWorld() -> void:
 func _on_reload_button_pressed() -> void:
 	self._tilemap.clear()
 	self._error = self._drill.initialize(self._tilemap, self._tilemapWidth, self._tilemapHeight, self._tilemap.scale)
-	self.initializeWorld()
+	self.initialize()
 
 func _ready() -> void:
-	self.initializeWorld()
+	self.initialize()
 
 # REMARK: Necessary to prevent double interaction whilst clicking on a button
 func _unhandled_input(event) -> void:

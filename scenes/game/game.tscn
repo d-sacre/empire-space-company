@@ -1,13 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba8vtmtikmgtc"]
+[gd_scene load_steps=8 format=3 uid="uid://ba8vtmtikmgtc"]
 
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_j6x03"]
+[ext_resource type="PackedScene" uid="uid://n1wepdd70sj1" path="res://managers/inventoryManager.tscn" id="1_plo20"]
 [ext_resource type="Script" path="res://scenes/game/world.gd" id="1_xok2i"]
 [ext_resource type="TileSet" uid="uid://hb7ti850h1mf" path="res://assets/2d/tiles/tileset/tile_set.tres" id="2_s0bfq"]
 [ext_resource type="Script" path="res://scenes/game/scripts/tileMap/tileMap.gd" id="3_yvdma"]
 [ext_resource type="PackedScene" uid="uid://dlbu1i533bjmb" path="res://assets/2d/vehicles/drill/drill.tscn" id="4_yoexs"]
+[ext_resource type="PackedScene" uid="uid://b14uf08klo3x5" path="res://gui/debug_inventory.tscn" id="7_4xgin"]
 
 [node name="root" type="Node2D"]
+script = ExtResource("1_j6x03")
 
 [node name="simulation" type="Node" parent="."]
+
+[node name="inventory" parent="." instance=ExtResource("1_plo20")]
 
 [node name="world" type="Node2D" parent="."]
 script = ExtResource("1_xok2i")
@@ -35,6 +41,7 @@ size_flags_vertical = 4
 mouse_filter = 1
 
 [node name="reloadButton" type="Button" parent="UI/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -45,5 +52,8 @@ offset_bottom = 75.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 48
 text = "Reload"
+
+[node name="DEBUG_INVENTORY" parent="UI/Control" instance=ExtResource("7_4xgin")]
+layout_mode = 1
 
 [connection signal="pressed" from="UI/Control/reloadButton" to="world" method="_on_reload_button_pressed"]
