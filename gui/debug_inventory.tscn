@@ -3,45 +3,64 @@
 [ext_resource type="Script" path="res://gui/debug_inventory.gd" id="1_egkxj"]
 [ext_resource type="PackedScene" uid="uid://dpcl8qk8nbryn" path="res://gui/elements/inventory/inventoryItem.tscn" id="1_gqouh"]
 
-[node name="DEBUG_INVENTORY" type="Control"]
-layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
+[node name="DEBUG_INVENTORY" type="MarginContainer"]
+offset_right = 562.0
+offset_bottom = 456.0
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 50
 script = ExtResource("1_egkxj")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(512, 256)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -256.0
-offset_bottom = 40.0
-grow_horizontal = 0
-
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Inventory[/b]"
+fit_content = true
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="caloricumOre" parent="PanelContainer/CenterContainer/GridContainer" instance=ExtResource("1_gqouh")]
+[node name="caloricumOre" parent="PanelContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_gqouh")]
 layout_mode = 2
 _itemName = "Caloricum"
 _iconPath = "res://assets/2d/inventory/caloricum_green.png"
 
-[node name="potassiumOre" parent="PanelContainer/CenterContainer/GridContainer" instance=ExtResource("1_gqouh")]
+[node name="potassiumOre" parent="PanelContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_gqouh")]
 layout_mode = 2
 _itemName = "Potassium"
 _iconPath = "res://assets/2d/inventory/potassium.png"
 _itemUnit = "kg"
 
-[node name="copperOre" parent="PanelContainer/CenterContainer/GridContainer" instance=ExtResource("1_gqouh")]
+[node name="copperOre" parent="PanelContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_gqouh")]
 layout_mode = 2
 _itemName = "Copper"
 _iconPath = "res://assets/2d/inventory/copper.png"
+
+[node name="energy" parent="PanelContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_gqouh")]
+layout_mode = 2
+_itemName = "Energy"
+_iconPath = "res://assets/2d/inventory/energy.png"
+_itemUnit = "J"
+
+[node name="decarbonizer" parent="PanelContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_gqouh")]
+layout_mode = 2
+_itemName = "Decarbonizer"
+_iconPath = "res://assets/2d/inventory/decarbonizer.png"
+_itemUnit = "kg"

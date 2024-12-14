@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ba8vtmtikmgtc"]
+[gd_scene load_steps=13 format=3 uid="uid://ba8vtmtikmgtc"]
 
 [ext_resource type="Script" path="res://simulation/resources.gd" id="1_iadfv"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_j6x03"]
@@ -8,6 +8,12 @@
 [ext_resource type="Script" path="res://scenes/game/scripts/tileMap/tileMap.gd" id="3_yvdma"]
 [ext_resource type="PackedScene" uid="uid://dlbu1i533bjmb" path="res://assets/2d/vehicles/drill/drill.tscn" id="4_yoexs"]
 [ext_resource type="PackedScene" uid="uid://b14uf08klo3x5" path="res://gui/debug_inventory.tscn" id="7_4xgin"]
+[ext_resource type="PackedScene" uid="uid://dwupvvaav3bqv" path="res://gui/game/hud/hud.tscn" id="9_bdmy4"]
+[ext_resource type="PackedScene" uid="uid://bym452u4d8rdt" path="res://gui/game/controlPanel/controlPanel.tscn" id="10_2d2p0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nuner"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s4bn"]
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_j6x03")
@@ -21,7 +27,7 @@ script = ExtResource("1_iadfv")
 
 [node name="world" type="Node2D" parent="."]
 script = ExtResource("1_xok2i")
-_tilemapWidth = 25
+_tilemapWidth = 31
 
 [node name="TileMap" type="TileMapLayer" parent="world"]
 position = Vector2(960, 640)
@@ -33,8 +39,7 @@ script = ExtResource("3_yvdma")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="UI"]
-layout_mode = 3
+[node name="Control" type="VBoxContainer" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -42,22 +47,33 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-mouse_filter = 1
 
 [node name="reloadButton" type="Button" parent="UI/Control"]
 visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -83.5
-offset_right = 83.5
-offset_bottom = 75.0
-grow_horizontal = 2
+layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Reload"
 
-[node name="DEBUG_INVENTORY" parent="UI/Control" instance=ExtResource("7_4xgin")]
-layout_mode = 1
+[node name="hud" parent="UI/Control" instance=ExtResource("9_bdmy4")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control"]
+layout_mode = 2
+theme_override_constants/separation = 24
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nuner")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control"]
+layout_mode = 2
+
+[node name="DEBUG_INVENTORY" parent="UI/Control/HBoxContainer" instance=ExtResource("7_4xgin")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="UI/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_8s4bn")
+
+[node name="controlPanel" parent="UI/Control/HBoxContainer" instance=ExtResource("10_2d2p0")]
+layout_mode = 2
 
 [connection signal="pressed" from="UI/Control/reloadButton" to="world" method="_on_reload_button_pressed"]

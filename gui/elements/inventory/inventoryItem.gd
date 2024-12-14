@@ -6,8 +6,8 @@ extends MarginContainer
 
 @export_file var _iconPath = "res://icon.svg"
 @export var _iconSize : Vector2 = Vector2(128,128)
-@export var _itemValue : String = "0.00"
-@export_enum("t", "kg") var _itemUnit : String = "t"
+@export var _itemValue : float = 0.00
+@export_enum("t", "kg", "J") var _itemUnit : String = "t"
 
 @onready var _icon : TextureRect = $GridContainer/CenterContainer/TextureRect
 @onready var _label : Label = $GridContainer/Label
@@ -20,7 +20,7 @@ func _update_item_name() -> void:
 	self._label.text = self._itemName
 
 func _update_quantity() -> void:
-	self._quantity.text = "[center]" + self._itemValue + " " + self._itemUnit + "[/center]"
+	self._quantity.text = "[center]" + "%0.2f" % self._itemValue + " " + self._itemUnit + "[/center]"
 
 func initialize() -> void:
 	self._update_icon()
@@ -28,7 +28,7 @@ func initialize() -> void:
 	self._update_quantity()
 
 
-func update_value(value : String) -> void:
+func update_value(value : float) -> void:
 	self._itemValue = value
 	self._update_quantity()
 

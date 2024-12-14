@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://8vvlkapqeci0" path="res://icon.svg" id="2_0jgc4"]
 
 [node name="inventoryItem" type="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
 offset_top = 197.0
 offset_right = 128.0
 offset_bottom = 197.0
@@ -16,7 +17,7 @@ script = ExtResource("1_do6yw")
 [node name="GridContainer" type="GridContainer" parent="."]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="GridContainer"]
@@ -30,7 +31,7 @@ stretch_mode = 2
 [node name="Label" type="Label" parent="GridContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Test"
+text = "Item Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -38,5 +39,5 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center]Test[/center]"
+text = "[center]0.00 t[/center]"
 fit_content = true
