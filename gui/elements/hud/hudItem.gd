@@ -47,6 +47,12 @@ func update_value(value : float) -> void:
 	self._itemValue = value
 	self._update_quantity()
 
+func update_value_and_status(value : float, status : String) -> void:
+	if status != self._itemStatus:
+		self.update_item_status(status)
+
+	self.update_value(value)
+
 func _ready() -> void:
 	self.initialize()
 	

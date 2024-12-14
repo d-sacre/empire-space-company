@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ba8vtmtikmgtc"]
+[gd_scene load_steps=14 format=3 uid="uid://ba8vtmtikmgtc"]
 
 [ext_resource type="Script" path="res://simulation/resources.gd" id="1_iadfv"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_j6x03"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b14uf08klo3x5" path="res://gui/debug_inventory.tscn" id="7_4xgin"]
 [ext_resource type="PackedScene" uid="uid://dwupvvaav3bqv" path="res://gui/game/hud/hud.tscn" id="9_bdmy4"]
 [ext_resource type="PackedScene" uid="uid://bym452u4d8rdt" path="res://gui/game/controlPanel/controlPanel.tscn" id="10_2d2p0"]
+[ext_resource type="PackedScene" uid="uid://c4dsd6qrltlst" path="res://managers/gameDataManager.tscn" id="11_qmjdk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nuner"]
 
@@ -23,7 +24,9 @@ script = ExtResource("1_j6x03")
 [node name="Resources" type="Node" parent="simulation"]
 script = ExtResource("1_iadfv")
 
-[node name="inventory" parent="." instance=ExtResource("1_plo20")]
+[node name="gameDataManager" parent="." instance=ExtResource("11_qmjdk")]
+
+[node name="inventory" parent="gameDataManager" instance=ExtResource("1_plo20")]
 
 [node name="world" type="Node2D" parent="."]
 script = ExtResource("1_xok2i")

@@ -44,11 +44,11 @@ func CalcFco2() -> float:
 	var factors : Vector2 = Gas.CO2.Factors(co2)
 	return factors[0] - (factors[0] - factors[1]) / (values[1] - values[0]) * (co2 - values[0])
 
-func Simulate():
+func Simulate() -> void:
 	var idleHumans : int = maxHumans - workingHumans
 	var idleRobots : int = maxRobots - workingRobots
 	var fo2 : float = (Gas.O2.maxFactor - Gas.O2.minFactor) / (Gas.O2.max - Gas.O2.min) * o2
-	var fco2 : float = CalcFco2()
+	var fco2 : float = self.CalcFco2()
 	var p_ref_factor : float = (1.0 - wear) * machinespeed / workingWorkers
 	var p_ref_all : float = p_ref_factor * (fo2 * fco2 * workingHumans + (1 - wear) * workingRobots)
 	co2 = maxf(Gas.CO2.min, co2 - Ore.Decarbonizer.CO2Reduction * usedDecarbonizer)
@@ -65,8 +65,5 @@ func Simulate():
 	energy = energy - e_workers - e_drill - e_train - e_lift - e_ref_usage + e_ref_gen
 	wear = wear + Machine.WearFactor * machinespeed**2
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	Simulate()
-	
-	pass
+func _process(_delta : float) -> void:
+	self.Simulate()
