@@ -188,9 +188,6 @@ func update_future_route(endPoint : Vector2) -> void:
 					_tmp_tcEndEqualIm1Y
 				) and not self._inInitialState
 
-				# print_debug("Smaller: ", _tmp_tcEndSmallerIm1, ", larger: ", _tmp_tcEndLargerIm1, ", y equal: ", _tmp_tcEndEqualIm1Y, ", y not zero:", _tmp_yNotZero, ", left: ", _tmp_sideLeft, ", right: ", _tmp_sideRight)
-				# print_debug("larger/smaller: ", _tmp_subconditionSmallerGreater, ", CONDITION: ", _tmp_condition)
-
 				if not _tmp_condition:
 					if _tmp_intermediate1 not in _tmp_futureRouteTMC:
 						_tmp_futureRouteTMC.append(_tmp_intermediate1)

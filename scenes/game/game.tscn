@@ -23,6 +23,9 @@ script = ExtResource("1_j6x03")
 
 [node name="Resources" type="Node" parent="simulation"]
 script = ExtResource("1_iadfv")
+energy = 99.9
+decarbonizer = 5.0
+maxHumans = 3
 
 [node name="gameDataManager" parent="." instance=ExtResource("11_qmjdk")]
 

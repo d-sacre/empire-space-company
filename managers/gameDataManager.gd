@@ -71,6 +71,10 @@ func _update_weight() -> void:
 func update_time(timeDelta : float) -> void:
 	self._database.time.current += timeDelta
 
+func update_by_keychain_database(data : Array) -> void:
+	for _entry in data:
+		DictionaryParsing.set_dict_element_via_keychain(self._database, _entry["keyChain"], _entry["value"])
+
 func get_database_complete() -> Dictionary:
 	var _tmp_complete : Dictionary = {"inventory": self._inventory.get_inventory()}
 	_tmp_complete.merge(self._database)

@@ -37,7 +37,7 @@ _itemValue = 21.0
 _itemMaximumValue = 21.0
 _itemUnit = "%"
 
-[node name="carbonDioxide" parent="PanelContainer/HBoxContainer" instance=ExtResource("2_0qf1l")]
+[node name="carbondioxide" parent="PanelContainer/HBoxContainer" instance=ExtResource("2_0qf1l")]
 layout_mode = 2
 _itemName = "Carbon Dioxide"
 _itemValue = 0.04

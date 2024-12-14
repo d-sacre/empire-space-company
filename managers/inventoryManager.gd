@@ -55,15 +55,11 @@ func get_weight() -> float:
 		match self._inventory["ore"][oreType]["unit"]:
 			"t":
 				_tmp_weight += self._inventory["ore"][oreType]["value"]
-				print("Weight (Inventory): Loop t: ", _tmp_weight, " ",self._inventory["ore"][oreType]["value"])
 			"kg":
 				_tmp_weight += self._inventory["ore"][oreType]["value"]/1000
-				print("Weight (Inventory): Loop kg: ", _tmp_weight, " ", self._inventory["ore"][oreType]["value"])
 
 	# REMARK: Hardcoded! Should be changed!
 	_tmp_weight += self._inventory.decarbonizer.value/1000
-
-	print("Weight (Inventory):", _tmp_weight)
 
 	return _tmp_weight
 

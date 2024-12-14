@@ -16,12 +16,16 @@ extends Node
 @export_range(0.0, 1.0, 0.01) var drillspeed : float = 0.0
 @export_range(0.0, 1.0, 0.01) var trainspeed : float = 0.0
 @export_range(0.0, 1.0, 0.01) var liftspeed : float = 0.0
+@export_range(0.0, 1.0, 0.01) var p_ref_all : float = 1.0
 @export_range(0.0, 1.0, 0.01) var wear : float = 0.0
 @export_group("Worker")
 @export_range(0, 9) var maxHumans : int = 0
 @export_range(0, 9) var workingHumans : int = 0
 @export_range(0, 9) var maxRobots : int = 0
 @export_range(0, 9) var workingRobots : int = 0
+
+var simulationStep : float = 1.00
+var _currentTime : float = 0.00
 
 #var productivity : float = 1.0
 var maxWorkers : int = maxHumans + maxRobots
@@ -32,12 +36,6 @@ var massLift : float = 0.0
 var ref_rate_caloricum : float = 0.0
 var ref_rate_copper : float = 0.0
 var ref_rate_potassium : float = 0.0
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	print(Worker.Human.IdleEnergy)
-	pass # Replace with function body.
 
 func CalcFco2() -> float:
 	var values : Vector2 = Gas.CO2.Values(co2)
@@ -50,7 +48,7 @@ func Simulate() -> void:
 	var fo2 : float = (Gas.O2.maxFactor - Gas.O2.minFactor) / (Gas.O2.max - Gas.O2.min) * o2
 	var fco2 : float = self.CalcFco2()
 	var p_ref_factor : float = (1.0 - wear) * machinespeed / workingWorkers
-	var p_ref_all : float = p_ref_factor * (fo2 * fco2 * workingHumans + (1 - wear) * workingRobots)
+	p_ref_all = p_ref_factor * (fo2 * fco2 * workingHumans + (1 - wear) * workingRobots)
 	co2 = maxf(Gas.CO2.min, co2 - Ore.Decarbonizer.CO2Reduction * usedDecarbonizer)
 	usedDecarbonizer = 0.0
 	co2 = idleHumans * Worker.Human.IdleCO2 + workingHumans * Worker.Human.WorkingCO2 + co2
@@ -65,5 +63,12 @@ func Simulate() -> void:
 	energy = energy - e_workers - e_drill - e_train - e_lift - e_ref_usage + e_ref_gen
 	wear = wear + Machine.WearFactor * machinespeed**2
 
+
+
 func _process(_delta : float) -> void:
-	self.Simulate()
+	self._currentTime += _delta
+
+	if self._currentTime >= self.simulationStep:
+		self.Simulate()
+		self._currentTime = 0
+	pass

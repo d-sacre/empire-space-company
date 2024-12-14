@@ -1,6 +1,6 @@
 class_name Machine
 
-const WearFactor : float = 0.0675
+const WearFactor : float = 0.0675 #0.0000675
 
 class Drill:
 	const EnergyUsage : float = 0.1

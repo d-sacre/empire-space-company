@@ -3,6 +3,11 @@ extends MarginContainer
 var _hudItemsRoot : String = "PanelContainer/HBoxContainer/"
 
 @onready var _hudItems: Dictionary = {
+	"energy": self.get_node(self._hudItemsRoot + "energy"),
+	"oxygen": self.get_node(self._hudItemsRoot + "oxygen"),
+	"carbondioxide": self.get_node(self._hudItemsRoot + "carbondioxide"),
+	"productivity": self.get_node(self._hudItemsRoot + "productivity"),
+	"wear": self.get_node(self._hudItemsRoot + "wear"),
 	"weight": self.get_node(self._hudItemsRoot + "weight"),
 	"time": self.get_node(self._hudItemsRoot + "MarginContainer/GridContainer/value")
 }
