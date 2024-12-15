@@ -5,7 +5,7 @@ var _queue : Array = []
 var _inventory : Dictionary = {
 	"ore": {
 		"caloricum": {
-			"value": 5,
+			"value": 0,
 			"unit": "t"
 		},
 		"potassium": {
@@ -66,6 +66,7 @@ func get_weight() -> float:
 
 func _on_requested_inventory_change(keyChain : Array, value, unit : String) -> void:
 	self._queue.append({"keyChain": keyChain, "value": value, "unit": unit})
+	# print_debug("Requested Inventory change: ", keyChain, ", ", value)
 
 func _process(_delta : float) -> void:
 	while len(self._queue) > 0:

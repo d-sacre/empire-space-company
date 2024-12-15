@@ -2,7 +2,10 @@
 
 extends MarginContainer
 
+signal slider_value_changed(sliderID, value)
+
 @export_category("Slider with Labels")
+@export var _sliderID : String = "Slider ID"
 @export var _descriptor : String = "Descriptor" 
 @export var _currentValue : float = 0.00
 @export var _startValue : float = 0.00
@@ -44,9 +47,9 @@ func _update_slider_limits() -> void:
 	self._slider.max_value = self._maximum
 	
 func _update_slider() -> void:
-	
 	self._update_slider_limits()
 	self._slider.value = self._currentValue
+	slider_value_changed.emit(self._sliderID, self._currentValue)
 
 func _initialize() -> void:
 	if self._itemUnit != "NONE":
@@ -70,8 +73,16 @@ func set_slider_status(disabled : bool) -> void:
 		
 	self._update_disable_slider()
 
+func get_slider_reference() -> HSlider:
+	return self._slider
+
+func force_set_slider_value(value : float) -> void:
+	self._slider.value = value
+	slider_value_changed.emit(self._sliderID, self._currentValue)
+
 func _on_h_slider_value_changed(value: float) -> void:
 	self._currentValue = value
+	slider_value_changed.emit(self._sliderID, self._currentValue)
 	self._update_quantity()
 	
 func _ready() -> void:

@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bym452u4d8rdt"]
+[gd_scene load_steps=3 format=3 uid="uid://bym452u4d8rdt"]
 
+[ext_resource type="Script" path="res://gui/game/controlPanel/controlPanel.gd" id="1_ljwkf"]
 [ext_resource type="PackedScene" uid="uid://crlfkxfwj7f62" path="res://gui/elements/general/slider/hSliderWithLabels.tscn" id="1_wphdy"]
 
 [node name="controlPanel" type="MarginContainer"]
 size_flags_vertical = 3
 theme_override_constants/margin_right = 50
+script = ExtResource("1_ljwkf")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -42,6 +44,7 @@ fit_content = true
 
 [node name="machineSpeed" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_wphdy")]
 layout_mode = 2
+_sliderID = "machineSpeed"
 _descriptor = "Machine Speed"
 _currentValue = 1.0
 _startValue = 1.0
@@ -52,6 +55,7 @@ _decimalHandling = "%0.1f"
 
 [node name="workersRefinery" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_wphdy")]
 layout_mode = 2
+_sliderID = "workersRefinery"
 _descriptor = "Workers Refinery"
 _maximum = 3.0
 _step = 1.0
@@ -59,21 +63,24 @@ _decimalHandling = "%0.0f"
 
 [node name="caloricumRate" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_wphdy")]
 layout_mode = 2
+_sliderID = "caloricumRate"
 _descriptor = "Caloricum Rate"
 _maximum = 2.0
 
 [node name="potassiumRate" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_wphdy")]
 layout_mode = 2
+_sliderID = "potassiumRate"
 _descriptor = "Potassium Rate"
 _maximum = 2.0
 
 [node name="decarbonizerAmount" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_wphdy")]
 layout_mode = 2
+_sliderID = "decarbonizerAmount"
 _descriptor = "Weight"
 _maximum = 5.0
 _itemUnit = "kg"
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="useDecarbonizer" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Decarbonize"

@@ -22,6 +22,9 @@ func update(data : Dictionary) -> void:
 			var _tmp_value : float = _tmp_dbEntry["current"]
 			var _tmp_status : String = _tmp_dbEntry["status"]
 
+			if _itemKey == "wear" or _itemKey == "productivity":
+				_tmp_value *= 100 
+
 			self._hudItems[_itemKey].update_value_and_status(_tmp_value, _tmp_status)
 
 		else:
