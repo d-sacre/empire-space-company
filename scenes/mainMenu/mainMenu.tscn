@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmjvk725nt4x3"]
+[gd_scene load_steps=5 format=3 uid="uid://bmjvk725nt4x3"]
 
 [ext_resource type="Theme" uid="uid://3gcvgx761s7v" path="res://gui/themes/mainMenu.theme" id="1_3oaip"]
+[ext_resource type="Material" uid="uid://cwlayufsvfgid" path="res://assets/2d/materials/starySky.material" id="1_q7rvl"]
 [ext_resource type="Script" path="res://scenes/mainMenu/mainMenu.gd" id="2_3cetj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cpeem"]
 
 [node name="mainMenu" type="ColorRect"]
+material = ExtResource("1_q7rvl")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -68,7 +70,6 @@ theme_override_constants/separation = 24
 theme_override_styles/separator = SubResource("StyleBoxEmpty_cpeem")
 
 [node name="credits" type="Button" parent="MarginContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 text = "Credits"
 
@@ -80,3 +81,21 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_cpeem")
 [node name="exit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
+
+[node name="credits" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(720, 640)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Test"

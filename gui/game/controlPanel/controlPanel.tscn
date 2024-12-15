@@ -76,7 +76,7 @@ _maximum = 2.0
 [node name="decarbonizerAmount" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_wphdy")]
 layout_mode = 2
 _sliderID = "decarbonizerAmount"
-_descriptor = "Weight"
+_descriptor = "Decarb"
 _maximum = 5.0
 _itemUnit = "kg"
 

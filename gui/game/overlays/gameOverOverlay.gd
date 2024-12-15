@@ -8,6 +8,7 @@ func _on_main_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/mainMenu/mainMenu.tscn")
 	
 func _on_exit_button_pressed() -> void:
+	get_tree().paused = false
 	self.get_tree().quit()
 	
 func set_reason(text : String) -> void:
