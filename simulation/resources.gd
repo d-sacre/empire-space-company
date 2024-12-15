@@ -36,6 +36,7 @@ var massLift : float = 0.0
 var ref_rate_caloricum : float = 0.0
 var ref_rate_copper : float = 0.0
 var ref_rate_potassium : float = 0.0
+var ref_rate_decarbonizer : float = 0.0
 
 func CalcFco2() -> float:
 	var values : Vector2 = Gas.CO2.Values(co2)
@@ -47,7 +48,9 @@ func Simulate() -> void:
 	var idleRobots : int = maxRobots - workingRobots
 	var fo2 : float = (Gas.O2.maxFactor - Gas.O2.minFactor) / (Gas.O2.max - Gas.O2.min) * o2
 	var fco2 : float = self.CalcFco2()
-	var p_ref_factor : float = (1.0 - wear) * machinespeed / workingWorkers
+	var p_ref_factor : float = 0.0
+	if workingWorkers > 0:
+		p_ref_factor = (1.0 - wear) * machinespeed / workingWorkers
 	p_ref_all = p_ref_factor * (fo2 * fco2 * workingHumans + (1 - wear) * workingRobots)
 	co2 = maxf(Gas.CO2.min, co2 - Ore.Decarbonizer.CO2Reduction * usedDecarbonizer)
 	usedDecarbonizer = 0.0
@@ -57,12 +60,25 @@ func Simulate() -> void:
 	var e_drill : float = Machine.Drill.EnergyUsage / (1 - wear) * (drillspeed * machinespeed)**2
 	var e_train : float = Machine.Train.EnergyUsage * massTrain / (1 - wear) * (trainspeed * machinespeed)**2
 	var e_lift : float = Machine.Lift.EnergyUsage * massLift / (1 - wear) * (liftspeed * machinespeed)**2
-	var e_ref_ore : float = ref_rate_copper * Ore.Caloricum.EnergyReq + ref_rate_potassium * Ore.Potassium.EnergyReq
+	var e_ref_ore : float = ref_rate_caloricum * Ore.Caloricum.EnergyReq + ref_rate_potassium * Ore.Potassium.EnergyReq
 	var e_ref_usage : float = p_ref_all * workingWorkers * e_ref_ore
 	var e_ref_gen : float = p_ref_all * workingWorkers * ref_rate_caloricum * Ore.Caloricum.EnergyRate
 	energy = energy - e_workers - e_drill - e_train - e_lift - e_ref_usage + e_ref_gen
 	wear = wear + Machine.WearFactor * machinespeed**2
-
+	var m_caloricum : float = Ore.Caloricum.ProcessRate * p_ref_all * workingWorkers * ref_rate_caloricum
+	var m_potassium : float = Ore.Potassium.ProcessRate * p_ref_all * workingWorkers * ref_rate_potassium
+	var m_decarb : float = Ore.Potassium.RefiningRate * p_ref_all * workingWorkers * ref_rate_decarbonizer
+	
+	print("p: ", p_ref_factor)
+	print("p: ", p_ref_all)
+	print("Workers: ", e_workers)
+	print("Drill: ", e_drill)
+	print("train: ", e_train)
+	print("lift: ", e_lift)
+	print("ore: ", e_ref_ore)
+	print("use: ", e_ref_usage)
+	print("gen: ", e_ref_gen)
+	print("energy: ", energy)
 
 
 func _process(_delta : float) -> void:

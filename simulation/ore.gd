@@ -7,7 +7,7 @@ class Caloricum:
 
 class Potassium:
 	const EnergyReq : float = 0.3
-	const EnergyRate : float = 0.33
+	const RefiningRate : float = 0.33
 	const ProcessRate : float = 3.0
 
 class Decarbonizer:
