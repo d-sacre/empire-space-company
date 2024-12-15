@@ -1,51 +1,53 @@
 extends Node
 
+signal change_game_fsm_state_request(state)
+
 var _queue : Array = []
 
 var _database : Dictionary = {
 	"energy": {
-		"current": 800.00, # REMARK: Has to be made flexible
-		"max": 800.00, # REMARK: Has to be made flexible
+		"current": GAME_PARAMETERS.START.ENERGY, 
+		"max": GAME_PARAMETERS.EXTREMA.ENERGY.MAXIMUM, 
 		"status": "normal"
 	},
 	"oxygen": {
 		"min": Gas.O2.min,
-		"current": Gas.O2.max,
+		"current": GAME_PARAMETERS.START.ATMOSPHERE.O2,
 		"max": Gas.O2.max,
 		"status": "normal"
 	},
 	"carbondioxide": {
 		"min": Gas.CO2.min,
-		"current": Gas.CO2.min,
+		"current": GAME_PARAMETERS.START.ATMOSPHERE.CO2,#Gas.CO2.min,
 		"max": Gas.CO2.max,
 		"status": "normal"
 	},
 	"productivity": {
-		"current": 100.00,
-		"max": 100.00,
+		"current": GAME_PARAMETERS.START.PRODUCTIVITY,
+		"max": GAME_PARAMETERS.EXTREMA.PRODUCTIVITY.MAXIMUM,
 		"status": "normal"
 	},
 	"wear": {
-		"current": 0.00,
-		"max": 100.00,
+		"current": GAME_PARAMETERS.START.WEAR,
+		"max": GAME_PARAMETERS.EXTREMA.WEAR.MAXIMUM,
 		"status": "normal"
 	},
 	"weight": {
-		"current": 100.00, # REMARK: Has to be made flexible
-		"max": 150.00, # REMARK: Has to be made flexible
+		"current": GAME_PARAMETERS.EXTREMA.ROCKET.WEIGHT.NET, # REMARK: Has to be made flexible
+		"max": GAME_PARAMETERS.EXTREMA.ROCKET.WEIGHT.GROSS.MAXIMUM, # REMARK: Has to be made flexible
 		"status": "normal"
 	},
 	"time": {
 		"current": 0.00
 	},
 	"machine_speed": {
-		"current": 1.00, # REMARK: Has to be made flexible
-		"max": 2.0 # REMARK: Has to be made flexible
+		"current": GAME_PARAMETERS.START.MACHINE_SPEED, # REMARK: Has to be made flexible
+		"max": GAME_PARAMETERS.EXTREMA.MACHINE_SPEED.MAXIMUM # REMARK: Has to be made flexible
 	},
 	"workers": {
 		"refinery": {
 			"current": 0, # REMARK: Has to be made flexible
-			"max": 3 # REMARK: Has to be made flexible
+			"max":  GAME_PARAMETERS.EXTREMA.WORKERS.TOTAL
 		}
 	},
 	"rates": {
@@ -54,7 +56,7 @@ var _database : Dictionary = {
 	},
 	"decarbonize": {
 		"current": 0.00,
-		"max": 5.00, # REMARK: Has to be made flexible
+		"max": GAME_PARAMETERS.START.INVENTORY.DECARBONIZER, 
 		"execute": false
 	}
 }
@@ -66,8 +68,98 @@ var _controlPanelReference : MarginContainer = null
 
 var _error : int = 0
 
+func _update_status_low_condition(itemBase : Dictionary, limits) -> bool:
+	var _tmp_conditionCaution : bool = itemBase.current <= limits.CAUTION
+	var _tmp_conditionDanger : bool = itemBase.current <= limits.DANGER
+	var _tmp_conditionEndOfGame : bool = itemBase.current <= limits.END_OF_GAME
+
+	if _tmp_conditionCaution:
+		itemBase.status = "caution"
+
+		if _tmp_conditionDanger:
+			itemBase.status = "danger"
+
+			if _tmp_conditionEndOfGame:
+				return false
+	else:
+		if itemBase.status != "normal":
+			itemBase.status = "normal"
+
+	return true
+
+func _update_status_high_condition(itemBase : Dictionary, limits) -> bool:
+	var _tmp_conditionCaution : bool = itemBase.current >= limits.CAUTION
+	var _tmp_conditionDanger : bool = itemBase.current >= limits.DANGER
+	var _tmp_conditionEndOfGame : bool = itemBase.current >= limits.END_OF_GAME
+
+	if _tmp_conditionCaution:
+		itemBase.status = "caution"
+
+		if _tmp_conditionDanger:
+			itemBase.status = "danger"
+
+			if _tmp_conditionEndOfGame:
+				return false
+	else:
+		if itemBase.status != "normal":
+			itemBase.status = "normal"
+
+	return true
+
 func _update_energy() -> void:
 	self._inventory._inventory.energy.current.value = self._database.energy.current 
+
+func _update_energy_status() -> void:
+	var _tmp_conditionLowCaution : bool = self._database.energy.current <= GAME_LIMITS.ENERGY.MINING.LOW.CAUTION
+	var _tmp_conditionHighCaution : bool = self._database.energy.current >= GAME_LIMITS.ENERGY.MINING.HIGH.CAUTION
+
+	var _tmp_conditionLowDanger : bool = self._database.energy.current <= GAME_LIMITS.ENERGY.MINING.LOW.DANGER
+	var _tmp_conditionHighDanger : bool = self._database.energy.current >= GAME_LIMITS.ENERGY.MINING.HIGH.DANGER
+
+	var _tmp_conditionLowEndOfGame : bool = self._database.energy.current <= GAME_LIMITS.ENERGY.MINING.LOW.END_OF_GAME
+	var _tmp_conditionHighEndOfGame : bool = self._database.energy.current >= GAME_LIMITS.ENERGY.MINING.HIGH.END_OF_GAME
+
+	if _tmp_conditionLowCaution or _tmp_conditionHighCaution:
+		print("Energy: Caution")
+		self._database.energy.status = "caution"
+		if _tmp_conditionLowDanger or _tmp_conditionHighDanger:
+			self._database.energy.status = "danger"
+			if _tmp_conditionLowEndOfGame or _tmp_conditionHighEndOfGame:
+				change_game_fsm_state_request.emit("out_of_energy")
+	else:
+		if self._database.energy.status != "normal":
+			self._database.energy.status = "normal"
+
+func _update_oxygen_status() -> void:
+	var _tmp_endOfGame : bool = not self._update_status_low_condition(self._database.oxygen, GAME_LIMITS.O2.LOW)
+	
+	if _tmp_endOfGame:
+		change_game_fsm_state_request.emit("out_of_oxygen")
+
+func _update_carbondioxide_status() -> void:
+	var _tmp_endOfGame : bool = not self._update_status_high_condition(self._database.carbondioxide, GAME_LIMITS.CO2.HIGH)
+
+	if _tmp_endOfGame:
+		change_game_fsm_state_request.emit("too_much_co2")
+
+func _update_wear_status() -> void:
+	var _tmp_endOfGame : bool = not self._update_status_high_condition(self._database.wear, GAME_LIMITS.WEAR.HIGH)
+
+	if _tmp_endOfGame:
+		change_game_fsm_state_request.emit("too_much_wear")
+
+func _update_weight_status() -> void:
+	var _tmp_endOfGame : bool = not self._update_status_high_condition(self._database.weight, GAME_LIMITS.WEIGHT.HIGH)
+
+	if _tmp_endOfGame:
+		change_game_fsm_state_request.emit("too_much_weight")
+
+func _update_status_all() -> void:
+	self._update_energy_status()
+	self._update_oxygen_status()
+	self._update_carbondioxide_status() 
+	self._update_wear_status()
+	self._update_weight_status()
 
 func _update_decarbonize_current(value : float) -> void:
 	self._database.decarbonize.current = value
@@ -89,7 +181,7 @@ func _update_decarbonizer_usage() -> void:
 
 func _update_weight() -> void:
 	# REMARK: Rocket empty weight hardcoded!
-	self._database.weight.current = 100.00 + self._inventory.get_weight()
+	self._database.weight.current = GAME_PARAMETERS.EXTREMA.ROCKET.WEIGHT.NET + self._inventory.get_weight()
 
 func _update_simulation_parameters() -> void:
 	# DESCRIPTION: Update inventory properties
@@ -109,6 +201,10 @@ func _update_simulation_parameters() -> void:
 	# self._simulationReference.ref_rate_copper # REMARK: Not yet implemented
 	self._simulationReference.ref_rate_potassium = self._database.rates.potassium
 	self._simulationReference.ref_rate_decarbonizer = self._simulationReference.ref_rate_potassium
+
+func _check_for_quest_fulfilled() -> void:
+	if self._inventory._inventory.ore.copper.value >= GAME_PARAMETERS.GOALS.MINING.COPPER.ORE:
+		change_game_fsm_state_request.emit("enough")
 
 func _on_request_game_data_change(keyChain : Array, value, unit : String) -> void:
 	self._queue.append({"keyChain": keyChain, "value": value, "unit": unit})
@@ -156,7 +252,9 @@ func _process(_delta: float) -> void:
 
 	# DESCRIPTION: Updates of the values
 	self._update_energy()
+	self._update_status_all()
 	self._update_decarbonizer_usage()
 	self._update_decarbonize_max()
 	self._update_weight()
 	self._update_simulation_parameters()
+	self._check_for_quest_fulfilled()

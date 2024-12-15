@@ -4,13 +4,13 @@ signal request_inventory_change(keyChain, value, unit)
 
 @export_category("Simulation")
 @export_group("Environment")
-@export_range(Gas.O2.min, Gas.O2.max, 0.01, "suffix:%") var o2 : float = Gas.O2.max
-@export_range(Gas.CO2.min, Gas.CO2.max, 0.01, "suffix:%") var co2 : float = Gas.CO2.min
+@export_range(Gas.O2.min, Gas.O2.max, 0.01, "suffix:%") var o2 : float = GAME_PARAMETERS.START.ATMOSPHERE.O2
+@export_range(Gas.CO2.min, Gas.CO2.max, 0.01, "suffix:%") var co2 : float = GAME_PARAMETERS.START.ATMOSPHERE.CO2
 @export_group("Resources")
 @export_range(0.0, 99.9, 0.01, "suffix:t copper ore") var copperOre : float = 0.0
 @export_range(0.0, 99.9, 0.01, "suffix:t caloricum ore") var caloricumOre : float = 0.0
 @export_range(0.0, 99.9, 0.01, "suffix:kg pottasium ore") var pottasiumOre : float = 0.0
-@export_range(0.0, 1500.0, 0.01, "suffix:J energy") var energy : float = 800.00
+@export_range(0.0, 1500.0, 0.01, "suffix:J energy") var energy : float = GAME_PARAMETERS.START.ENERGY
 @export_range(0.0, 99.9, 0.01, "suffix:t copper") var copper : float = 0.0
 @export_range(0.0, 99.9, 0.01, "suffix:kg decarbonizer") var decarbonizer : float = 0.0
 @export_group("Machine")
@@ -19,7 +19,7 @@ signal request_inventory_change(keyChain, value, unit)
 @export_range(0.0, 1.0, 0.01) var trainspeed : float = 0.0
 @export_range(0.0, 1.0, 0.01) var liftspeed : float = 0.0
 @export_range(0.0, 1.0, 0.01) var p_ref_all : float = 1.0
-@export_range(0.0, 1.0, 0.01) var wear : float = 0.0
+@export_range(0.0, 1.0, 0.01) var wear : float = GAME_PARAMETERS.START.WEAR
 @export_group("Worker")
 @export_range(0, 9) var maxHumans : int = 0
 @export_range(0, 9) var workingHumans : int = 0

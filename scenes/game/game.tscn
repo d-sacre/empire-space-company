@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ba8vtmtikmgtc"]
+[gd_scene load_steps=16 format=3 uid="uid://ba8vtmtikmgtc"]
 
 [ext_resource type="Script" path="res://simulation/resources.gd" id="1_iadfv"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_j6x03"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dwupvvaav3bqv" path="res://gui/game/hud/hud.tscn" id="9_bdmy4"]
 [ext_resource type="PackedScene" uid="uid://bym452u4d8rdt" path="res://gui/game/controlPanel/controlPanel.tscn" id="10_2d2p0"]
 [ext_resource type="PackedScene" uid="uid://c4dsd6qrltlst" path="res://managers/gameDataManager.tscn" id="11_qmjdk"]
+[ext_resource type="PackedScene" uid="uid://b0kcko34wre12" path="res://gui/game/overlays/gameOverOverlay.tscn" id="12_5ep0c"]
+[ext_resource type="PackedScene" uid="uid://ds18mpf8ukiml" path="res://gui/game/overlays/missionSuccessOverlay.tscn" id="13_6f87f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nuner"]
 
@@ -80,5 +82,9 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_8s4bn")
 
 [node name="controlPanel" parent="UI/Control/HBoxContainer" instance=ExtResource("10_2d2p0")]
 layout_mode = 2
+
+[node name="gameOver" parent="UI" instance=ExtResource("12_5ep0c")]
+
+[node name="success" parent="UI" instance=ExtResource("13_6f87f")]
 
 [connection signal="pressed" from="UI/Control/reloadButton" to="world" method="_on_reload_button_pressed"]

@@ -5,15 +5,15 @@ var _queue : Array = []
 var _inventory : Dictionary = {
 	"ore": {
 		"caloricum": {
-			"value": 0,
+			"value": GAME_PARAMETERS.START.INVENTORY.ORE.CALORICUM,
 			"unit": "t"
 		},
 		"potassium": {
-			"value": 0,
+			"value": GAME_PARAMETERS.START.INVENTORY.ORE.POTASSIUM,
 			"unit": "kg"
 		},
 		"copper": {
-			"value": 0,
+			"value": GAME_PARAMETERS.START.INVENTORY.ORE.COPPER,
 			"unit": "t"
 		},
 		"empty": {
@@ -23,16 +23,16 @@ var _inventory : Dictionary = {
 	},
 	"energy": {
 		"current": {
-			"value": 800.00,
+			"value": GAME_PARAMETERS.START.ENERGY,
 			"unit": "J"
 		},
 		"max": {
-			"value": 800.00,
+			"value": GAME_PARAMETERS.EXTREMA.ENERGY.MAXIMUM,
 			"unit": "J"
 		}
 	},
 	"decarbonizer" : {
-		"value": 5.00,
+		"value": GAME_PARAMETERS.START.INVENTORY.DECARBONIZER,
 		"unit": "kg"
 	}
 }
