@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://mpoc5ajudv6b"]
+[gd_scene load_steps=3 format=3 uid="uid://mpoc5ajudv6b"]
 
 [ext_resource type="Script" path="res://gui/elements/hud/hudItem.gd" id="1_urigs"]
+[ext_resource type="PackedScene" uid="uid://c757x6iuusjwx" path="res://gui/elements/gauge/gauge.tscn" id="2_nog3i"]
 
 [node name="hudItem" type="MarginContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -19,6 +20,14 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="gauge" parent="GridContainer/CenterContainer" instance=ExtResource("2_nog3i")]
+layout_mode = 2
+maximum = 0.0
+current = 0.0
 
 [node name="name" type="RichTextLabel" parent="GridContainer"]
 layout_mode = 2

@@ -83,6 +83,7 @@ layout_mode = 2
 text = "Exit"
 
 [node name="credits" type="RichTextLabel" parent="."]
+visible = false
 custom_minimum_size = Vector2(720, 640)
 layout_mode = 1
 anchors_preset = 8

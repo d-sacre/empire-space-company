@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="96.433334"
+   height="96.433334"
+   viewBox="0 0 96.433334 96.433334"
+   sodipodi:docname="gauge_dial.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <radialGradient
+       fx="40.000519"
+       fy="60.000759"
+       cx="50.000641"
+       cy="50.000641"
+       r="50.000641"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient5">
+      <stop
+         style="stop-opacity:1;stop-color:#ffffd9"
+         offset="0"
+         id="stop1" />
+      <stop
+         style="stop-opacity:1;stop-color:#ffff40"
+         offset="0.1799995"
+         id="stop2" />
+      <stop
+         style="stop-opacity:1;stop-color:#b3b300"
+         offset="0.35999959"
+         id="stop3" />
+      <stop
+         style="stop-opacity:1;stop-color:#808000"
+         offset="0.5"
+         id="stop4" />
+      <stop
+         style="stop-opacity:1;stop-color:#000000"
+         offset="1"
+         id="stop5" />
+    </radialGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath6">
+      <path
+         d="m 1.4174,3.54335 c 0,1.24066 1.95758,0.54013 2.83486,1.41742 C 6.21205,6.92056 0.71776,7.95291 4.1e-4,10.63004 -0.7169,7.95291 -6.2112,6.92056 -4.2514,4.96077 -3.45393,4.01038 -1.41656,4.78401 -1.41656,3.54335 l -8.4e-4,-21.26007 h 2.8348 z"
+         transform="matrix(1.3333333,0,0,-1.3333333,48.217333,48.216)"
+         id="path6" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="4.8012443"
+     inkscape:cx="48.112528"
+     inkscape:cy="48.216667"
+     inkscape:window-width="1366"
+     inkscape:window-height="709"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1">
+    <inkscape:page
+       x="0"
+       y="0"
+       inkscape:label="1"
+       id="page1"
+       width="96.433334"
+       height="96.433334"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <g
+     id="g1"
+     inkscape:groupmode="layer"
+     inkscape:label="1">
+    <g
+       id="g5"
+       clip-path="url(#clipPath6)">
+      <path
+         d="M 0,0 H 100 V 100 H 0 Z"
+         transform="matrix(0.33132,0,0,-0.756,31.65188,90.74044)"
+         style="fill:url(#radialGradient5);stroke:none"
+         id="path5" />
+    </g>
+    <path
+       id="path7"
+       d="m 1.4174,3.54335 c 0,1.24066 1.95758,0.54013 2.83486,1.41742 C 6.21205,6.92056 0.71776,7.95291 4.1e-4,10.63004 -0.7169,7.95291 -6.2112,6.92056 -4.2514,4.96077 -3.45393,4.01038 -1.41656,4.78401 -1.41656,3.54335 l -8.4e-4,-21.26007 h 2.8348 z"
+       style="fill:none;stroke:#000000;stroke-width:0.3985;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+       transform="matrix(1.3333333,0,0,-1.3333333,48.217333,48.216)" />
+  </g>
+</svg>

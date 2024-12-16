@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b14uf08klo3x5"]
+[gd_scene load_steps=4 format=3 uid="uid://b14uf08klo3x5"]
 
 [ext_resource type="Script" path="res://gui/debug_inventory.gd" id="1_egkxj"]
 [ext_resource type="PackedScene" uid="uid://dpcl8qk8nbryn" path="res://gui/elements/inventory/inventoryItem.tscn" id="1_gqouh"]
+[ext_resource type="Theme" uid="uid://h02okdvbiapy" path="res://gui/themes/gameUiPanelContainer.theme" id="2_ejm7t"]
 
 [node name="DEBUG_INVENTORY" type="MarginContainer"]
 offset_right = 562.0
@@ -13,6 +14,7 @@ script = ExtResource("1_egkxj")
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(512, 256)
 layout_mode = 2
+theme = ExtResource("2_ejm7t")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

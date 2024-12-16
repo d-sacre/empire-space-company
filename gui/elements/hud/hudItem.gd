@@ -11,6 +11,7 @@ extends MarginContainer
 
 var _colorPrefix : String = "[color=#000000]"
 
+@onready var _gauge : Control = $GridContainer/CenterContainer/gauge
 @onready var _name : RichTextLabel = $GridContainer/name
 @onready var _quantity : RichTextLabel = $GridContainer/quantity
 	
@@ -32,8 +33,13 @@ func _update_quantity() -> void:
 	if self._showMax == 1:
 		_tmp_text += "/" + "%0.2f" % self._itemMaximumValue + " " + self._itemUnit
 	self._quantity.text =  _tmp_text + "[/color][/center]"
+	
+	self._gauge.update_value(self._itemValue)
 
 func initialize() -> void:
+	self._gauge.minimum = 0.00 # Has to be changed
+	self._gauge.maximum = self._itemMaximumValue
+	
 	self._update_item_name()
 	self._update_item_font_color_default()
 	self._update_item_name()

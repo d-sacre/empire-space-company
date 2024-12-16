@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://c757x6iuusjwx"]
+
+[ext_resource type="Script" path="res://gui/elements/gauge/gauge.gd" id="1_h5sjq"]
+[ext_resource type="Texture2D" uid="uid://c054pjo5d6hxk" path="res://gui/elements/gauge/sprites/gauge_body.svg" id="1_ilros"]
+[ext_resource type="Material" uid="uid://dtvbt37nbd0oc" path="res://gui/elements/gauge/materials/gauge_body.material" id="1_omvw2"]
+[ext_resource type="Texture2D" uid="uid://ctg1biuxn3aiy" path="res://gui/elements/gauge/sprites/gauge_background.svg" id="2_fm4fc"]
+[ext_resource type="Texture2D" uid="uid://to2pa5lcos3k" path="res://gui/elements/gauge/sprites/gauge_dial.svg" id="2_natfn"]
+[ext_resource type="Texture2D" uid="uid://d1p385p224wgg" path="res://gui/elements/gauge/sprites/gauge_hub.svg" id="6_xespg"]
+[ext_resource type="Texture2D" uid="uid://cf3u5nx5leapg" path="res://gui/elements/gauge/sprites/gauge_hub_grid.svg" id="7_0cxq6"]
+
+[node name="gauge" type="Control"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 3
+anchor_right = 0.116
+anchor_bottom = 0.199
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -113.632
+offset_bottom = -108.952
+pivot_offset = Vector2(48, 72)
+script = ExtResource("1_h5sjq")
+current = 0.5
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_fm4fc")
+
+[node name="dial" type="TextureRect" parent="."]
+clip_contents = true
+layout_mode = 2
+offset_right = 96.0
+offset_bottom = 96.0
+pivot_offset = Vector2(48, 72)
+texture = ExtResource("2_natfn")
+
+[node name="mainBody" type="TextureRect" parent="."]
+texture_filter = 5
+material = ExtResource("1_omvw2")
+layout_mode = 2
+offset_right = 96.0
+offset_bottom = 96.0
+texture = ExtResource("1_ilros")
+
+[node name="hub" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="hubBase" type="TextureRect" parent="hub"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = ExtResource("6_xespg")
+
+[node name="hubGrid" type="TextureRect" parent="hub"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = ExtResource("7_0cxq6")

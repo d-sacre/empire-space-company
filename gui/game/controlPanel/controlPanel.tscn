@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bym452u4d8rdt"]
+[gd_scene load_steps=4 format=3 uid="uid://bym452u4d8rdt"]
 
 [ext_resource type="Script" path="res://gui/game/controlPanel/controlPanel.gd" id="1_ljwkf"]
 [ext_resource type="PackedScene" uid="uid://crlfkxfwj7f62" path="res://gui/elements/general/slider/hSliderWithLabels.tscn" id="1_wphdy"]
+[ext_resource type="Theme" uid="uid://h02okdvbiapy" path="res://gui/themes/gameUiPanelContainer.theme" id="2_fq1f5"]
 
 [node name="controlPanel" type="MarginContainer"]
 size_flags_vertical = 3
@@ -10,6 +11,7 @@ script = ExtResource("1_ljwkf")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
+theme = ExtResource("2_fq1f5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
