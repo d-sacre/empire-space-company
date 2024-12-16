@@ -1,0 +1,99 @@
+[
+	{
+		"section": 
+		{
+			"heading": "Contributors",
+			"content": [
+				{
+					"subsection": 
+						{
+							"heading": "Milatur",
+							"content": [
+								{
+									"itemize": {
+										"content": [
+											"Simulation Programming",
+											"Debugging",
+											"Testing"
+										]
+									}
+								}
+							]
+						}
+				},
+				{
+					"vspace": 1
+				},
+				{
+					"subsection": 
+						{
+							"heading": "dsacre",
+							"content": [
+								{
+									"itemize": {
+										"content": [
+											"Original Concept", 
+											"Co-Author of University Project",
+											"UI Programming",
+											"Asset Creation (Art, Icons, Music)"
+										]
+									}
+								}
+							]
+						}
+				}
+			]
+		}
+	},
+	{
+		"vspace" : 1
+	},
+	{
+		"subsection": {
+			"heading": "Original Project",
+			"content": [
+				"The original project was created by Christina Gihl, Vinzent Penzkofer, Daniel Sacré and Johannes Turnwald as a pure html/JavaScript game for an university assignment in 2018."
+			]
+		}
+	},
+	{
+		"vspace" : 1
+	},
+	{
+		"section": {
+			"heading": "Used Assets",
+			"content": [
+                {
+					"subsection": {
+						"heading": "Art:",
+						"content": [
+                            {
+                                "itemize": {
+                                    "content": [
+                                        "Joe Mabel:{quote}Comet-style grenade style carbon tetrachloride fire extinguisher, Blackman House Museum, Snohomish, Washington, USA.{quote}\n{urlstart}https://commons.wikimedia.org/wiki/File:Snohomish_-_Blackman_House_Museum_-_Comet_fire_extinguisher_02A.jpg{urlend}\nlicense: Creative Commons Attribution-Share Alike 3.0 Unported",
+										"Maxim Bilovitskiy:{quote}Single crystal of ammonium - cobalt sulfate. Growth period - 3 months in home conditions.{quote}\n{urlstart}https://commons.wikimedia.org/wiki/File:Ammonium_-_cobalt_sulfate.JPG{urlend}\nlicense: Creative Commons Attribution-Share Alike 4.0",
+										"Rob Lavinsky / iRocks.com:{quote}Cerussite with Chalcotrichite inclusions on Malachite. Locality: Tsumeb Mine (Tsumcorp Mine), Tsumeb, Otjikoto (Oshikoto) Region, Namibia.{quote}\n{urlstart}https://commons.wikimedia.org/wiki/File:Cerussite-Cuprite-Malachite-cktsu-42c.jpg#/media/File:Cerussite-Cuprite-Malachite-cktsu-42a.jpg{urlend}\nlicense: Creative Commons Attribution-Share Alike 3.0",
+										"BXXD:{quote}Potassium{quote}\n{urlstart}https://commons.wikimedia.org/wiki/File:Kalium.jpg{urlend}\nlicense: Creative Commons Attribution-Share Alike 3.0 Unported",
+										"Rob Tuytel:{quote}Rock 06{quote}\n{urlstart}https://polyhaven.com/a/rock_06{urlend}\nlicense: Creative Commons Zero"
+									]
+                                }
+                            }
+                        ]
+                    }
+                }, 
+				{
+					"vspace" : 1
+				},
+				{
+					"subsection": {
+						"heading": "VFX",
+						"content": [
+							"gerardogc2378:{quote}Stars Shader{quote}\n{urlstart}https://godotshaders.com/shader/stars-shader/{urlend}\nlicense: Creative Commons Zero"
+						]
+					}
+				}
+			]
+		}
+	}
+
+]

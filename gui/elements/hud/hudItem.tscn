@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://mpoc5ajudv6b"]
+
+[ext_resource type="Script" path="res://gui/elements/hud/hudItem.gd" id="1_urigs"]
+
+[node name="hudItem" type="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_top = 197.0
+offset_right = 128.0
+offset_bottom = 197.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+script = ExtResource("1_urigs")
+_showMax = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="name" type="RichTextLabel" parent="GridContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][color=#ffffff]Item Name: [/color][/center]"
+fit_content = true
+
+[node name="quantity" type="RichTextLabel" parent="GridContainer"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center][color=#ffffff]0.00 t/0.00 t[/color][/center]"
+fit_content = true
+scroll_active = false

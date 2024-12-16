@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://ba8vtmtikmgtc"]
-
-[node name="root" type="Node2D"]
-
-[node name="simulation" type="Node" parent="."]
-
-[node name="world" type="Node2D" parent="."]
-
-[node name="UI" type="CanvasLayer" parent="."]

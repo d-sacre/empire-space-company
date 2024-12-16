@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlbu1i533bjmb"]
+
+[ext_resource type="Script" path="res://assets/2d/vehicles/drill/scripts/drill.gd" id="1_be76u"]
+[ext_resource type="Texture2D" uid="uid://cqfnalrdp5orq" path="res://assets/2d/vehicles/drill/drillPlaceholder.svg" id="2_xgatt"]
+
+[sub_resource type="Curve2D" id="Curve2D_stwcw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsta0"]
+size = Vector2(113, 123)
+
+[node name="drill" type="Path2D"]
+curve = SubResource("Curve2D_stwcw")
+script = ExtResource("1_be76u")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+loop = false
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D"]
+texture = ExtResource("2_xgatt")
+
+[node name="Area2D" type="Area2D" parent="PathFollow2D/Sprite2D"]
+collision_layer = 65
+collision_mask = 65
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Sprite2D/Area2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_xsta0")
+
+[connection signal="body_shape_entered" from="PathFollow2D/Sprite2D/Area2D" to="." method="_on_area_2d_body_shape_entered"]

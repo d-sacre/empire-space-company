@@ -1,0 +1,119 @@
+[gd_scene load_steps=19 format=3 uid="uid://ba8vtmtikmgtc"]
+
+[ext_resource type="Script" path="res://simulation/resources.gd" id="1_iadfv"]
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_j6x03"]
+[ext_resource type="PackedScene" uid="uid://n1wepdd70sj1" path="res://managers/inventoryManager.tscn" id="1_plo20"]
+[ext_resource type="Script" path="res://scenes/game/world.gd" id="1_xok2i"]
+[ext_resource type="TileSet" uid="uid://hb7ti850h1mf" path="res://assets/2d/tiles/tileset/tile_set.tres" id="2_s0bfq"]
+[ext_resource type="Script" path="res://scenes/game/scripts/tileMap/tileMap.gd" id="3_yvdma"]
+[ext_resource type="PackedScene" uid="uid://dlbu1i533bjmb" path="res://assets/2d/vehicles/drill/drill.tscn" id="4_yoexs"]
+[ext_resource type="Material" uid="uid://cwlayufsvfgid" path="res://assets/2d/materials/starySky.material" id="5_dlq4r"]
+[ext_resource type="PackedScene" uid="uid://b14uf08klo3x5" path="res://gui/debug_inventory.tscn" id="7_4xgin"]
+[ext_resource type="PackedScene" uid="uid://dwupvvaav3bqv" path="res://gui/game/hud/hud.tscn" id="9_bdmy4"]
+[ext_resource type="PackedScene" uid="uid://bym452u4d8rdt" path="res://gui/game/controlPanel/controlPanel.tscn" id="10_2d2p0"]
+[ext_resource type="PackedScene" uid="uid://c4dsd6qrltlst" path="res://managers/gameDataManager.tscn" id="11_qmjdk"]
+[ext_resource type="PackedScene" uid="uid://b0kcko34wre12" path="res://gui/game/overlays/gameOverOverlay.tscn" id="12_5ep0c"]
+[ext_resource type="PackedScene" uid="uid://ds18mpf8ukiml" path="res://gui/game/overlays/missionSuccessOverlay.tscn" id="13_6f87f"]
+[ext_resource type="PackedScene" uid="uid://bj5o7haq0dls0" path="res://scenes/inGameMenu/inGameMenu.tscn" id="13_sb7t5"]
+[ext_resource type="PackedScene" uid="uid://c838upgs7ry57" path="res://gui/game/overlays/quest.tscn" id="13_v4ggv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nuner"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s4bn"]
+
+[node name="root" type="Node2D"]
+script = ExtResource("1_j6x03")
+
+[node name="simulation" type="Node" parent="."]
+
+[node name="Resources" type="Node" parent="simulation"]
+script = ExtResource("1_iadfv")
+decarbonizer = 5.0
+maxHumans = 3
+
+[node name="gameDataManager" parent="." instance=ExtResource("11_qmjdk")]
+
+[node name="inventory" parent="gameDataManager" instance=ExtResource("1_plo20")]
+
+[node name="fbg" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="ColorRect" parent="fbg"]
+material = ExtResource("5_dlq4r")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="world" type="CanvasLayer" parent="."]
+
+[node name="world" type="Node2D" parent="world"]
+script = ExtResource("1_xok2i")
+_tilemapWidth = 31
+
+[node name="TileMapLayer" type="TileMapLayer" parent="world/world"]
+
+[node name="TileMap" type="TileMapLayer" parent="world/world"]
+position = Vector2(960, 640)
+scale = Vector2(0.175, 0.175)
+tile_set = ExtResource("2_s0bfq")
+script = ExtResource("3_yvdma")
+
+[node name="drill" parent="world/world" instance=ExtResource("4_yoexs")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Control" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="reloadButton" type="Button" parent="UI/Control"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Reload"
+
+[node name="hud" parent="UI/Control" instance=ExtResource("9_bdmy4")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control"]
+layout_mode = 2
+theme_override_constants/separation = 24
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nuner")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control"]
+layout_mode = 2
+
+[node name="DEBUG_INVENTORY" parent="UI/Control/HBoxContainer" instance=ExtResource("7_4xgin")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="UI/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_8s4bn")
+
+[node name="controlPanel" parent="UI/Control/HBoxContainer" instance=ExtResource("10_2d2p0")]
+layout_mode = 2
+
+[node name="inGameMenu" parent="UI" instance=ExtResource("13_sb7t5")]
+
+[node name="quest" parent="UI" instance=ExtResource("13_v4ggv")]
+visible = false
+offset_left = -156.0
+offset_top = -291.5
+offset_right = 156.0
+offset_bottom = 291.5
+
+[node name="gameOver" parent="UI" instance=ExtResource("12_5ep0c")]
+visible = false
+
+[node name="success" parent="UI" instance=ExtResource("13_6f87f")]
+visible = false
+
+[connection signal="pressed" from="UI/Control/reloadButton" to="world/world" method="_on_reload_button_pressed"]
